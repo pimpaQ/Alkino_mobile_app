@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MauiApp1.EntryPage"
+             NavigationPage.HasNavigationBar="False">
+    <Grid Padding="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="150"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            
+        </Grid.RowDefinitions>
+
+        <Frame Grid.Row="1" Grid.RowSpan="6" WidthRequest="393" HeightRequest="600"  CornerRadius="20" BackgroundColor="#8968FF"/>
+        <Image
+            Grid.Row="0"
+            Source="logotip.png"
+            Background="Transparent"
+            Margin="20"
+            VerticalOptions="Center"
+            HorizontalOptions="Center"/>
+
+        <StackLayout Grid.Row="1" Margin="0,60,0,0">
+            <Picker x:Name="picker" Title="Выбрать услугу" TextColor="White" >
+                <Picker.ItemsSource>
+                    <x:Array Type="{x:Type x:String}">
+                        <x:String>Переустройство/перепланировка помещения в многоквартирном доме</x:String>
+                        <x:String>Принять на учет гражданина, нуждающимся в жил.помещениях</x:String>
+                        <x:String>Бытовая характеристика гражданина</x:String>
+                        <x:String>Справка о составе семьи</x:String>
+                        <x:String>Выписка из ЕГРН</x:String>
+                        <x:String>Справка с места жительства умершего</x:String>
+                        <x:String>Разрешение на захоронение</x:String>
+                    </x:Array>
+                </Picker.ItemsSource>
+            </Picker>
+        </StackLayout>
+
+        <StackLayout Grid.Row="2" Orientation="Vertical" Margin="0,40,0,0">
+            <Label Text="Выбрать дату" TextColor="White"/>
+            <DatePicker  x:Name="DateSelector" TextColor="White"/>
+        </StackLayout>
+
+        <StackLayout Orientation="Vertical" Grid.Row="3" Margin="0,40,0,0">
+            <Label Text="Выбрать время" TextColor="White"/>
+            <TimePicker  x:Name="TimeSelector" TextColor="White"/>
+        </StackLayout>
+        <StackLayout Orientation="Vertical" Grid.Row="4" Margin="0,40,0,0">
+            <Label Text="Примечание(не обязательно)" TextColor="White"/>
+            <Entry x:Name="DescriptionEditor" TextColor="White"/>
+        </StackLayout>        
+        
+
+        <Button Grid.Row="5" 
+                Grid.RowSpan="6" 
+                HeightRequest="50" 
+                WidthRequest="300"
+                Text="Записаться"
+                x:Name="EntryBtn"
+                Clicked="EntryBtn_Clicked"
+                BackgroundColor="White"
+                TextColor="#8968FF"
+                />
+        <StackLayout Orientation="Horizontal" HorizontalOptions="Center" VerticalOptions="Center"  Grid.Row="7" HeightRequest="70"  BackgroundColor="#F2F2F2" WidthRequest="390" Margin="0,50,0,0">
+            <StackLayout HorizontalOptions="Center" VerticalOptions="Center" Margin="50, 0, 0, 0">
+                <ImageButton Source="mainpage.png" WidthRequest="40" HeightRequest="40" x:Name="mainpageBtn" Clicked="mainpageBtn_Clicked"/>
+                <Label Text="Главная" FontSize="10" HorizontalTextAlignment="Center" />
+            </StackLayout>
+
+            <StackLayout HorizontalOptions="Center" VerticalOptions="Center" Margin="65, 0, 0, 0">
+                <ImageButton Source="entrypage.png" WidthRequest="40" HeightRequest="40" x:Name="ToEntryPage"/>
+                <Label Text="Запись на прием" FontSize="10" HorizontalTextAlignment="Center" />
+            </StackLayout>
+
+            <StackLayout HorizontalOptions="Center" VerticalOptions="Center" Margin="50, 0, 0, 0">
+                <ImageButton Source="profilepage.png" WidthRequest="40" HeightRequest="40" x:Name="profilepageBtn" Clicked="profilepageBtn_Clicked" />
+                <Label Text="Профиль" FontSize="10" HorizontalTextAlignment="Center" />
+            </StackLayout>
+        </StackLayout>
+    </Grid>
+</ContentPage>

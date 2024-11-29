@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MauiApp1.ProfilePage"
+             NavigationPage.HasNavigationBar="False">
+    <Grid Padding="20" RowDefinitions="*,*,*,*,*,*,auto,auto" ColumnDefinitions="*">
+        <!-- Заголовок -->
+        <Label Text="Настройка профиля"
+               FontSize="20"
+               FontAttributes="Bold"
+               HorizontalOptions="Center"
+               VerticalOptions="Center"
+               Grid.Row="0" />
+
+        <!-- Иконка профиля -->
+        <Image Source="profilelogo.png"
+               HeightRequest="90"
+               WidthRequest="90"
+               HorizontalOptions="Center"
+               VerticalOptions="Center"
+               Grid.Row="1" />
+
+        <!-- ФИО -->
+        <Label Text="{Binding FullName}" 
+               FontSize="18" 
+               HorizontalOptions="Center" 
+               VerticalOptions="Center" 
+               Grid.Row="2" />
+
+        <!-- Электронная почта -->
+        <Frame CornerRadius="10"
+               BackgroundColor="#925EE6"
+               Padding="10"
+               HasShadow="False"
+               Grid.Row="3">
+            <StackLayout Orientation="Vertical">
+                <Label Text="Электронная почта"
+                       FontSize="14"
+                       TextColor="White"/>
+                <Entry Text="{Binding Email}" 
+                       FontSize="14" 
+                       TextColor="White"
+                       x:Name="EmailEntry" />
+            </StackLayout>
+        </Frame>
+
+        <!-- Телефон -->
+        <Frame CornerRadius="10"
+               BackgroundColor="#925EE6"
+               Padding="10"
+               HasShadow="False"
+               Grid.Row="4"
+               Margin="0,5,0,5">
+            <StackLayout Orientation="Vertical">
+                <Label Text="Телефон"
+                       FontSize="14"
+                       TextColor="White" Margin="0,9"/>
+                <Label Text="{Binding PhoneNumber}"
+                       FontSize="16"
+                       TextColor="White"
+                       FontAttributes="Bold" />
+            </StackLayout>
+        </Frame>
+
+        <!-- Язык приложения -->
+        <Frame CornerRadius="10"
+               BackgroundColor="#925EE6"
+               Padding="10"
+               HasShadow="False"
+               Grid.Row="5">
+            <StackLayout Orientation="Vertical">
+                <Label Text="Выберите язык" TextColor="White"/>
+                <Picker SelectedIndex="0" FontSize="14" x:Name="LangPicker" TextColor="White">
+                    <Picker.Items>
+                        <x:String>Русский</x:String>
+                        <x:String>Башҡорт</x:String>
+                    </Picker.Items>
+                </Picker>
+            </StackLayout>
+        </Frame>
+
+        <!-- Кнопка сохранения -->
+        <Button Grid.Row="6" 
+                HeightRequest="40" 
+                WidthRequest="200" 
+                Margin="15" 
+                Text="Сохранить" 
+                BackgroundColor="#7C4DFF" 
+                x:Name="SaveBtn"
+                Clicked="SaveBtn_Clicked"/>
+
+        <!-- Нижняя панель навигации -->
+        <StackLayout Orientation="Horizontal" HorizontalOptions="Fill" VerticalOptions="End" BackgroundColor="White" Grid.Row="7" Margin="0,50,0,0">
+            <StackLayout HorizontalOptions="CenterAndExpand" VerticalOptions="Center">
+                <ImageButton Source="mainpage.png" WidthRequest="40" HeightRequest="40" x:Name="mainPageBtn" Clicked="mainPageBtn_Clicked"/>
+                <Label Text="Главная" FontSize="10" HorizontalTextAlignment="Center" />
+            </StackLayout>
+            <StackLayout HorizontalOptions="CenterAndExpand" VerticalOptions="Center">
+                <ImageButton Source="entrypage.png" WidthRequest="40" HeightRequest="40" x:Name="EntryPageBtn" Clicked="EntryPageBtn_Clicked"/>
+                <Label Text="Запись на прием" FontSize="10" HorizontalTextAlignment="Center" />
+            </StackLayout>
+            <StackLayout HorizontalOptions="CenterAndExpand" VerticalOptions="Center">
+                <ImageButton Source="profilepage.png" WidthRequest="40" HeightRequest="40" />
+                <Label Text="Профиль" FontSize="10" HorizontalTextAlignment="Center" />
+            </StackLayout>
+        </StackLayout>
+    </Grid>
+</ContentPage>

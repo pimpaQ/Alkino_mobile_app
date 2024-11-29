@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MauiApp1.AdminPage"
+             Title="AdminPage"
+             NavigationPage.HasNavigationBar="False">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="120"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <Image
+                Grid.Row="0"
+                Grid.ColumnSpan="2"
+                Source="logotip.png"
+                Background="Transparent"
+                Margin="20"/>
+
+        <CollectionView Grid.Row="1" x:Name="UsersLW" ItemsSource="{Binding Entries}" VerticalScrollBarVisibility="Always">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Frame Padding="10" BackgroundColor="#925EE6" CornerRadius="10" Margin="5">
+                        <StackLayout Padding="10" Orientation="Vertical">
+                            <Label Text="{Binding ServiceName}" FontSize="16" FontAttributes="Bold"/>
+                            <Label Text="{Binding DateTime}" FontSize="14"/>
+                            <Label Text="{Binding UserName}" FontSize="14"/>
+                            <Label Text="{Binding Description}" FontSize="12" TextColor="Gray"/>
+                            <Button Text="Подтвердить запись"
+                                    x:Name="OnConfirmEntry"
+                                    Clicked="OnConfirmEntry_Clicked"
+                                    CommandParameter="{Binding .}" 
+                                    BackgroundColor="White" 
+                                    TextColor="#925EE6"/>
+                        </StackLayout>
+                    </Frame>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </Grid>
+</ContentPage>

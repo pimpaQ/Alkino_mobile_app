@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MauiApp1.UserEntryPage"
+             NavigationPage.HasBackButton="False">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Назад" Clicked="GoBack_Clicked"/>
+    </ContentPage.ToolbarItems>
+
+    <StackLayout Padding="10" Spacing="10">
+        <Label Text="Все записи" 
+               FontSize="30" 
+               FontAttributes="Bold" 
+               TextColor="#925EE6"
+               HorizontalOptions="Center" 
+               Margin="10"/>
+
+        <ListView x:Name="AllEntriesList" ItemsSource="{Binding UserEntries}" HasUnevenRows="True">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <Frame Padding="10" BackgroundColor="#925EE6" CornerRadius="10" Margin="5">
+                            <StackLayout>
+                                <Label Text="{Binding Reason.ReasonName}" TextColor="White" FontSize="16" FontAttributes="Bold" />
+                                <Label Text="{Binding Date}" TextColor="White" FontSize="14" />
+                                <Label Text="{Binding Time}" TextColor="White" FontSize="14" />
+                                <Label Text="{Binding Description}" TextColor="White" FontSize="12" />
+                                <!-- Новый Label для статуса -->
+                                <Label Text="{Binding Status}" TextColor="White" FontSize="12" FontAttributes="Italic"/>
+                            </StackLayout>
+                        </Frame>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </StackLayout>
+</ContentPage>
