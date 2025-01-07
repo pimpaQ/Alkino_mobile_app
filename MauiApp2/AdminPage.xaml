@@ -6,36 +6,45 @@
              NavigationPage.HasNavigationBar="False">
         <Grid>
             <Grid.RowDefinitions>
-                <RowDefinition Height="120"/>
+                <RowDefinition Height="80"/>
                 <RowDefinition Height="*"/>
-            </Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
 
-            <Image
-                Grid.Row="0"
-                Grid.ColumnSpan="2"
-                Source="logotip.png"
-                Background="Transparent"
-                Margin="20"/>
+        <Label Text="Подтвержденные записи" x:Name="labelll" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" TextColor="#925EE6" FontSize="20" FontAttributes="Bold"/>
 
-        <CollectionView Grid.Row="1" x:Name="UsersLW" ItemsSource="{Binding Entries}" VerticalScrollBarVisibility="Always">
+        <CollectionView Grid.Row="1" x:Name="UsersLW" ItemsSource="{Binding CurrentEntries}" VerticalScrollBarVisibility="Always">
             <CollectionView.ItemTemplate>
                 <DataTemplate>
                     <Frame Padding="10" BackgroundColor="#925EE6" CornerRadius="10" Margin="5">
                         <StackLayout Padding="10" Orientation="Vertical">
-                            <Label Text="{Binding ServiceName}" FontSize="16" FontAttributes="Bold"/>
-                            <Label Text="{Binding DateTime}" FontSize="14"/>
-                            <Label Text="{Binding UserName}" FontSize="14"/>
+                            <Label Text="{Binding ServiceName}" FontSize="16" FontAttributes="Bold" TextColor="White"/>
+                            <Label Text="{Binding DateTime}" FontSize="14" TextColor="White"/>
+                            <Label Text="{Binding UserName}" FontSize="14" TextColor="White"/>
                             <Label Text="{Binding Description}" FontSize="12" TextColor="Gray"/>
-                            <Button Text="Подтвердить запись"
-                                    x:Name="OnConfirmEntry"
-                                    Clicked="OnConfirmEntry_Clicked"
-                                    CommandParameter="{Binding .}" 
-                                    BackgroundColor="White" 
-                                    TextColor="#925EE6"/>
+                            <StackLayout Orientation="Horizontal" IsVisible="{Binding Access, Converter={StaticResource PendingAccessToVisibilityConverter}}" Spacing="10">
+                                <Button Text="Подтвердить"
+                                        BackgroundColor="Green"
+                                        TextColor="White"
+                                        CommandParameter="{Binding .}"
+                                        x:Name="OnConfirmBtn"
+                                        Clicked="OnConfirmBtn_Clicked"/>
+                                <Button Text="Отклонить"
+                                        BackgroundColor="Red"
+                                        TextColor="White"
+                                        CommandParameter="{Binding .}"
+                                        x:Name="OnRejectBtn"
+                                        Clicked="OnRejectBtn_Clicked"/>
+                            </StackLayout>
                         </StackLayout>
                     </Frame>
                 </DataTemplate>
             </CollectionView.ItemTemplate>
         </CollectionView>
+        <StackLayout Orientation="Horizontal" Grid.Row="2" HorizontalOptions="FillAndExpand" Padding="10">
+            <ImageButton Source="confirmlogo" HeightRequest="66" WidthRequest="66" x:Name="confirmBtn" Clicked="confirmBtn_Clicked"/>
+            <ImageButton Source="waitico" HeightRequest="90" WidthRequest="90" HorizontalOptions="CenterAndExpand" x:Name="waitToconfirmBtn" Clicked="waitToconfirmBtn_Clicked"/>
+            <ImageButton Source="rejectico" HeightRequest="80" WidthRequest="80" x:Name="rejectBtn" Clicked="rejectBtn_Clicked"/>
+        </StackLayout>   
     </Grid>
 </ContentPage>

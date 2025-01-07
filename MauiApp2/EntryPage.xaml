@@ -66,17 +66,19 @@
                 TextColor="#8968FF"
                 />
         <StackLayout Orientation="Horizontal" HorizontalOptions="Center" VerticalOptions="Center"  Grid.Row="7" HeightRequest="70"  BackgroundColor="#F2F2F2" WidthRequest="390" Margin="0,50,0,0">
-            <StackLayout HorizontalOptions="Center" VerticalOptions="Center" Margin="50, 0, 0, 0">
+            <StackLayout HorizontalOptions="Center" VerticalOptions="Center" Margin="20, 0, 0, 0">
                 <ImageButton Source="mainpage.png" WidthRequest="40" HeightRequest="40" x:Name="mainpageBtn" Clicked="mainpageBtn_Clicked"/>
                 <Label Text="Главная" FontSize="10" HorizontalTextAlignment="Center" />
             </StackLayout>
-
-            <StackLayout HorizontalOptions="Center" VerticalOptions="Center" Margin="65, 0, 0, 0">
+            <StackLayout Orientation="Vertical" VerticalOptions="Center" HorizontalOptions="Center" Margin="40,0,0,0">
+                <ImageButton Source="newsicopng.png" WidthRequest="60" HeightRequest="40" x:Name="newsBtn" Clicked="newsBtn_Clicked"/>
+                <Label Text="Новости" FontSize="10" HorizontalTextAlignment="Center"/>
+            </StackLayout>
+            <StackLayout HorizontalOptions="Center" VerticalOptions="Center" Margin="30, 0, 0, 0">
                 <ImageButton Source="entrypage.png" WidthRequest="40" HeightRequest="40" x:Name="ToEntryPage"/>
                 <Label Text="Запись на прием" FontSize="10" HorizontalTextAlignment="Center" />
             </StackLayout>
-
-            <StackLayout HorizontalOptions="Center" VerticalOptions="Center" Margin="50, 0, 0, 0">
+            <StackLayout HorizontalOptions="Center" VerticalOptions="Center" Margin="40, 0, 0, 0">
                 <ImageButton Source="profilepage.png" WidthRequest="40" HeightRequest="40" x:Name="profilepageBtn" Clicked="profilepageBtn_Clicked" />
                 <Label Text="Профиль" FontSize="10" HorizontalTextAlignment="Center" />
             </StackLayout>

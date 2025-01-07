@@ -33,6 +33,11 @@ public partial class EntryPage : ContentPage
     {
         await Navigation.PushAsync(new ProfilePage());
     }
+
+    private async void newsBtn_Clicked(object sender, EventArgs e)
+    {
+        await Navigation.PushAsync(new NewsPage());
+    }
 }
 
 

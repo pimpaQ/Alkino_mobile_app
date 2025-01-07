@@ -6,32 +6,42 @@
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="Назад" Clicked="GoBack_Clicked"/>
     </ContentPage.ToolbarItems>
-
-    <StackLayout Padding="10" Spacing="10">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+    
         <Label Text="Все записи" 
                FontSize="30" 
                FontAttributes="Bold" 
                TextColor="#925EE6"
                HorizontalOptions="Center" 
-               Margin="10"/>
+               Margin="10" Grid.Row="0"/>
+        <StackLayout Grid.Row="1" Orientation="Horizontal" HorizontalOptions="CenterAndExpand">
+            <ImageButton Source="confirmlogo" HeightRequest="57" WidthRequest="80" x:Name="confirmBtn" Clicked="confirmBtn_Clicked"/>
+            <ImageButton Source="waitico" HeightRequest="80" WidthRequest="80" Margin="40,0,0,0" x:Name="waitBtn" Clicked="waitBtn_Clicked"/>
+            <ImageButton Source="rejectico" HeightRequest="70" WidthRequest="80" Margin="40,0,0,0" x:Name="rejectBtn" Clicked="rejectBtn_Clicked"/>
+        </StackLayout>
 
-        <ListView x:Name="AllEntriesList" ItemsSource="{Binding UserEntries}" HasUnevenRows="True">
-            <ListView.ItemTemplate>
+        <!-- Используем CollectionView вместо ListView -->
+        <CollectionView x:Name="AllEntriesList" ItemsSource="{Binding FilteredEntries}" VerticalScrollBarVisibility="Always" Grid.Row="2">
+            <CollectionView.ItemTemplate>
                 <DataTemplate>
-                    <ViewCell>
-                        <Frame Padding="10" BackgroundColor="#925EE6" CornerRadius="10" Margin="5">
-                            <StackLayout>
-                                <Label Text="{Binding Reason.ReasonName}" TextColor="White" FontSize="16" FontAttributes="Bold" />
-                                <Label Text="{Binding Date}" TextColor="White" FontSize="14" />
-                                <Label Text="{Binding Time}" TextColor="White" FontSize="14" />
-                                <Label Text="{Binding Description}" TextColor="White" FontSize="12" />
-                                <!-- Новый Label для статуса -->
-                                <Label Text="{Binding Status}" TextColor="White" FontSize="12" FontAttributes="Italic"/>
-                            </StackLayout>
-                        </Frame>
-                    </ViewCell>
+                    <Frame Padding="10" BackgroundColor="#925EE6" CornerRadius="10" Margin="5">
+                        <StackLayout>
+                            <Label Text="{Binding Reason.ReasonName}" TextColor="White" FontSize="16" FontAttributes="Bold" />
+                            <Label Text="{Binding Date}" TextColor="White" FontSize="14" />
+                            <Label Text="{Binding Time}" TextColor="White" FontSize="14" />
+                            <Label Text="{Binding Description}" TextColor="White" FontSize="12" />
+                            <!-- Новый Label для статуса -->
+                            <Label Text="{Binding Status}" TextColor="White" FontSize="12" FontAttributes="Italic"/>
+                            <Label Text="{Binding RejectDescription}" TextColor="White" FontSize="12"/>
+                        </StackLayout>
+                    </Frame>
                 </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
-    </StackLayout>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </Grid>
 </ContentPage>

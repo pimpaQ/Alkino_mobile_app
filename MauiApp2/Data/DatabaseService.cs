@@ -34,6 +34,14 @@ public class DatabaseService
             };
             await _database.InsertAllAsync(reasons);
         }
+        await RemoveExpiredEntriesAsync();
+    }
+    private static async Task RemoveExpiredEntriesAsync()
+    {
+        var currentDateTime = DateTime.Now;
+
+        // Удаляем просроченные записи через критерий
+        await _database.ExecuteAsync("DELETE FROM Entry WHERE Date || ' ' || Time < ?", currentDateTime.ToString("yyyy-MM-dd HH:mm:ss"));
     }
 
     public static SQLiteAsyncConnection Database => _database;

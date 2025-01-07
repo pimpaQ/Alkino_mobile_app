@@ -57,9 +57,16 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <None Remove="Resources\Images\confirmlogo.png" />
+	  <None Remove="Resources\Images\goslogo.png" />
 	  <None Remove="Resources\Images\listicon.png" />
 	  <None Remove="Resources\Images\logotip.png" />
+	  <None Remove="Resources\Images\newsicopng.png" />
 	  <None Remove="Resources\Images\profileLogo.png" />
+	  <None Remove="Resources\Images\rejectico.png" />
+	  <None Remove="Resources\Images\sitelogo.png" />
+	  <None Remove="Resources\Images\vklogo.png" />
+	  <None Remove="Resources\Images\waitico.png" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -69,6 +76,21 @@
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="8.0.1" />
 		<PackageReference Include="sqlite-net-pcl" Version="1.9.172" />
 		<PackageReference Include="SQLitePCLRaw.bundle_green" Version="2.1.10" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Compile Update="Resources\Strings\AppResources.Designer.cs">
+	    <DesignTime>True</DesignTime>
+	    <AutoGen>True</AutoGen>
+	    <DependentUpon>AppResources.resx</DependentUpon>
+	  </Compile>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <EmbeddedResource Update="Resources\Strings\AppResources.resx">
+	    <Generator>ResXFileCodeGenerator</Generator>
+	    <LastGenOutput>AppResources.Designer.cs</LastGenOutput>
+	  </EmbeddedResource>
 	</ItemGroup>
 
 	<ItemGroup>
@@ -88,6 +110,9 @@
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="UserEntryPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="NewsPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	</ItemGroup>

@@ -1,5 +1,6 @@
 using MauiApp1.Data;
 using MauiApp1.Models;
+using MauiApp1.VKApi;
 using System.Collections.ObjectModel;
 
 namespace MauiApp1
@@ -12,28 +13,21 @@ namespace MauiApp1
         public NewPage1()
         {
             InitializeComponent();
-            NavigationPage.SetHasNavigationBar(this, false);
-            BindingContext = this;
-            
-            // Загрузка данных
             LoadUserData();
+            BindingContext = this;
         }
         
         private async void LoadUserData()
         {
-            // Получаем текущего пользователя
             var userId = Session.CurrentUserId; // Идентификатор пользователя из сессии
             var currentUser = await DatabaseService.Database.Table<Users>()
                                       .FirstOrDefaultAsync(u => u.UserID == userId);
-
-            // Устанавливаем имя пользователя
             UserName = $"Добро пожаловать, {currentUser.Name}!";
             OnPropertyChanged(nameof(UserName));
-
             // Получаем записи текущего пользователя, отсортированные по дате и времени
             var entries = await DatabaseService.Database.Table<Entry>()
                                    .Where(e => e.UserID == userId)
-                                   .OrderByDescending(e => e.Date)
+                                   .OrderBy(e => e.Date)
                                    .ThenBy(e => e.Time)
                                    .ToListAsync();
 
@@ -43,7 +37,6 @@ namespace MauiApp1
                 entry.Reason = await DatabaseService.Database.Table<ReasonList>()
                                           .FirstOrDefaultAsync(r => r.ReasonListId == entry.ReasonID);
             }
-
             // Устанавливаем ближайшую запись и остальные
             if (entries.Any())
             {
@@ -55,13 +48,9 @@ namespace MauiApp1
                 NearestEntry = nearestEntry;
                 
             }
-            else
-            {
-                
-                
-            }
             OnPropertyChanged(nameof(UserEntries));
             OnPropertyChanged(nameof(NearestEntry));
+            
         }
         
         private async void profileBtn_Clicked(object sender, EventArgs e)
@@ -71,12 +60,34 @@ namespace MauiApp1
         private async void ToEntryPage_Clicked(object sender, EventArgs e)
         {
             await Navigation.PushAsync(new EntryPage());
-
         }
 
         private async void EntrylistPage_Clicked(object sender, EventArgs e)
         {
             await Navigation.PushAsync(new UserEntryPage());
+        }
+
+        private async void newsBtn_Clicked(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new NewsPage());
+        }
+
+        private async void vkBtn_Clicked(object sender, EventArgs e)
+        {
+            string vkUrl = "https://vk.com/public217342443";
+            await Launcher.OpenAsync(vkUrl);
+        }
+
+        private async void siteBtn_Clicked(object sender, EventArgs e)
+        {
+            string siteUrl = "https://cp-alkino.ru";
+            await Launcher.OpenAsync(siteUrl);
+        }
+
+        private async void gosBtn_Clicked(object sender, EventArgs e)
+        {
+            string gosUrl = "https://pos.gosuslugi.ru/form/?opaId=329659&utm_source=vk&utm_medium=80&utm_campaign=1020201202218";
+            await Launcher.OpenAsync(gosUrl);
         }
     }
 }

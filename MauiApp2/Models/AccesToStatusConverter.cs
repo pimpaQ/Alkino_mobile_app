@@ -9,7 +9,19 @@ namespace MauiApp1.Models
         {
             if (value is int acces)
             {
-                return acces == 0 ? "Ожидание подтверждения" : "Запись подтверждена";
+                if( acces == 0)
+                {
+                    return "Ожидание подтверждения";
+                }
+                else if (acces == 1)
+                {
+                    return "Запись подтверждена";
+                }
+                else
+                {
+                    return "Запись отклонена";
+                }
+                
             }
             return string.Empty;
         }

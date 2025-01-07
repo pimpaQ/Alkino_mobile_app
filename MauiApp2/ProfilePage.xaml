@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MauiApp1.ProfilePage"
              NavigationPage.HasNavigationBar="False">
-    <Grid Padding="20" RowDefinitions="*,*,*,*,*,*,auto,auto" ColumnDefinitions="*">
+    <Grid Padding="20" RowDefinitions="*,*,*,*,*,*,*,*" ColumnDefinitions="*">
         <!-- Заголовок -->
         <Label Text="Настройка профиля"
                FontSize="20"
@@ -90,16 +90,20 @@
                 Clicked="SaveBtn_Clicked"/>
 
         <!-- Нижняя панель навигации -->
-        <StackLayout Orientation="Horizontal" HorizontalOptions="Fill" VerticalOptions="End" BackgroundColor="White" Grid.Row="7" Margin="0,50,0,0">
-            <StackLayout HorizontalOptions="CenterAndExpand" VerticalOptions="Center">
+        <StackLayout Orientation="Horizontal" HorizontalOptions="Center" VerticalOptions="Center" BackgroundColor="White"  WidthRequest="390" Grid.Row="7" HeightRequest="70" Margin="0,50,0,0">
+            <StackLayout HorizontalOptions="Center" VerticalOptions="Center" Margin="20, 0, 0, 0">
                 <ImageButton Source="mainpage.png" WidthRequest="40" HeightRequest="40" x:Name="mainPageBtn" Clicked="mainPageBtn_Clicked"/>
                 <Label Text="Главная" FontSize="10" HorizontalTextAlignment="Center" />
             </StackLayout>
-            <StackLayout HorizontalOptions="CenterAndExpand" VerticalOptions="Center">
+            <StackLayout Orientation="Vertical" VerticalOptions="Center" HorizontalOptions="Center" Margin="40,0,0,0">
+                <ImageButton Source="newsicopng.png" WidthRequest="60" HeightRequest="40" x:Name="newsBtn" Clicked="newsBtn_Clicked"/>
+                <Label Text="Новости" FontSize="10" HorizontalTextAlignment="Center"/>
+            </StackLayout>
+            <StackLayout HorizontalOptions="Center" VerticalOptions="Center" Margin="30, 0, 0, 0">
                 <ImageButton Source="entrypage.png" WidthRequest="40" HeightRequest="40" x:Name="EntryPageBtn" Clicked="EntryPageBtn_Clicked"/>
                 <Label Text="Запись на прием" FontSize="10" HorizontalTextAlignment="Center" />
             </StackLayout>
-            <StackLayout HorizontalOptions="CenterAndExpand" VerticalOptions="Center">
+            <StackLayout HorizontalOptions="Center" VerticalOptions="Center" Margin="40, 0, 0, 0">
                 <ImageButton Source="profilepage.png" WidthRequest="40" HeightRequest="40" />
                 <Label Text="Профиль" FontSize="10" HorizontalTextAlignment="Center" />
             </StackLayout>

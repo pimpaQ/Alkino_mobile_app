@@ -11,6 +11,7 @@ public class Entry
     public string Time { get; set; }
     public int Acces { get; set; }
     public string Description { get; set; }
+    public string RejectDescription { get; set; }
 
     [Ignore]
     public Users User { get; set; }
@@ -18,5 +19,23 @@ public class Entry
     [Ignore] 
     public ReasonList Reason { get; set; }
 
-    public string Status => Acces == 1 ? "Подтверждена" : "Ожидает подтверждения";
+    public string Status
+    {
+        get
+        {
+            if(Acces == 1)
+            {
+                return "Подтверждена";
+            }
+            else if(Acces == 0)
+            {
+                return "Ожидает подтверждения";
+            }
+            else
+            {
+                return "Отклонена";
+            }
+        }
+    }
+
 }

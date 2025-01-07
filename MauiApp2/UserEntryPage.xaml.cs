@@ -6,7 +6,8 @@ namespace MauiApp1;
 
 public partial class UserEntryPage : ContentPage
 {
-    public ObservableCollection<Entry> UserEntries { get; set; }
+    public ObservableCollection<Entry> AllEntries { get; set; }
+    public ObservableCollection<Entry> FilteredEntries { get; set; }
 
     public UserEntryPage()
     {
@@ -23,38 +24,65 @@ public partial class UserEntryPage : ContentPage
     private async void LoadUserData()
     {
         // Получаем текущего пользователя
-        var userId = Session.CurrentUserId; // Идентификатор пользователя из сессии
-        var currentUser = await DatabaseService.Database.Table<Users>()
-                                  .FirstOrDefaultAsync(u => u.UserID == userId);
-
-        // Устанавливаем имя пользователя
-
-        // Получаем записи текущего пользователя, отсортированные по дате и времени
+        var userId = Session.CurrentUserId;
         var entries = await DatabaseService.Database.Table<Entry>()
-                               .Where(e => e.UserID == userId)
-                               .OrderByDescending(e => e.Date)
-                               .ThenBy(e => e.Time)
-                               .ToListAsync();
+                           .Where(e => e.UserID == userId)
+                           .ToListAsync();
 
         foreach (var entry in entries)
         {
-            // Загружаем связанные данные из ReasonList
             entry.Reason = await DatabaseService.Database.Table<ReasonList>()
-                                      .FirstOrDefaultAsync(r => r.ReasonListId == entry.ReasonID);
+                                  .FirstOrDefaultAsync(r => r.ReasonListId == entry.ReasonID);
         }
 
-        // Устанавливаем ближайшую запись и остальные
-        if (entries.Any())
+        AllEntries = new ObservableCollection<Entry>(entries);
+        FilteredEntries = new ObservableCollection<Entry>(entries.Where(e => e.Acces == 1));
+        OnPropertyChanged(nameof(FilteredEntries));
+    }
+    private string _selectedGroup;
+
+    private void HighlightButton(string selectedGroup)
+    {
+        // Сбросить фон всех кнопок
+        confirmBtn.BackgroundColor = Colors.Transparent;
+        waitBtn.BackgroundColor = Colors.Transparent;
+        rejectBtn.BackgroundColor = Colors.Transparent;
+
+        // Подсветить выбранную кнопку
+        switch (selectedGroup)
         {
-            // Устанавливаем данные для привязки
-            UserEntries = new ObservableCollection<Entry>(entries);
-            OnPropertyChanged(nameof(UserEntries));
+            case "Confirmed":
+                confirmBtn.BackgroundColor = Color.FromArgb("#D0FFD6"); // Зеленоватый
+                break;
+            case "Waiting":
+                waitBtn.BackgroundColor = Color.FromArgb("#FFF2D6"); // Желтоватый
+                break;
+            case "Rejected":
+                rejectBtn.BackgroundColor = Color.FromArgb("#FFD6D6"); // Красноватый
+                break;
         }
-        else
-        {
-            // Если записей нет
-            UserEntries = new ObservableCollection<Entry>();
-            OnPropertyChanged(nameof(UserEntries));
-        }
+
+        _selectedGroup = selectedGroup; // Обновляем текущую группу
+    }
+
+    private void confirmBtn_Clicked(object sender, EventArgs e)
+    {
+        HighlightButton("Confirmed");
+        FilteredEntries = new ObservableCollection<Entry>(AllEntries.Where(e => e.Acces == 1));
+        OnPropertyChanged(nameof(FilteredEntries));
+    }
+
+    private void waitBtn_Clicked(object sender, EventArgs e)
+    {
+        HighlightButton("Waiting");
+        FilteredEntries = new ObservableCollection<Entry>(AllEntries.Where(e => e.Acces == 0));
+        OnPropertyChanged(nameof(FilteredEntries));
+    }
+
+    private void rejectBtn_Clicked(object sender, EventArgs e)
+    {
+        HighlightButton("Rejected");
+        FilteredEntries = new ObservableCollection<Entry>(AllEntries.Where(e => e.Acces == 2));
+        OnPropertyChanged(nameof(FilteredEntries));
     }
 }

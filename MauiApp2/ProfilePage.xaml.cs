@@ -62,4 +62,9 @@ public partial class ProfilePage : ContentPage
             await DisplayAlert("Ошибка", "Не удалось найти пользователя.", "ОК");
         }
     }
+
+    private async void newsBtn_Clicked(object sender, EventArgs e)
+    {
+        await Navigation.PushAsync(new NewsPage());
+    }
 }
