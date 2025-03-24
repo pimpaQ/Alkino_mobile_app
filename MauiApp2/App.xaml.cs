@@ -4,14 +4,18 @@ namespace MauiApp1
 {
     public partial class App : Application
     {
+        public static LocalizationResourceManager LocalizationManager { get; } = new LocalizationResourceManager();
         public App()
         {
             InitializeComponent();
-            var culture = new CultureInfo("ba"); // Для башкирского языка
-            CultureInfo.DefaultThreadCurrentCulture = culture;
-            CultureInfo.DefaultThreadCurrentUICulture = culture;
-
             MainPage = new NavigationPage(new MainPage());
+        }
+        void SetCulture()
+        {
+            string lang = Preferences.Get("AppLanguage", "ru"); // Загружаем язык из настроек
+            CultureInfo culture = new CultureInfo(lang);
+            Thread.CurrentThread.CurrentCulture = culture;
+            Thread.CurrentThread.CurrentUICulture = culture;
         }
         protected override async void OnStart()
         {

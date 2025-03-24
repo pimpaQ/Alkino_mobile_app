@@ -2,7 +2,9 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MauiApp1.MainPage"
-             NavigationPage.HasNavigationBar="False">
+             NavigationPage.HasNavigationBar="False"
+             xmlns:resx="clr-namespace:MauiApp1.Resources.Strings"
+>
 
     <Grid Padding="10">
         <Grid.RowDefinitions>
@@ -55,8 +57,8 @@
                 Clicked="EnterButton"
                 x:Name="AuthorizationBtn"/>
 
-        <Label Text="Добро пожаловать в Алькино"
-               HorizontalOptions="Center"
+        <Label Text="{x:Static local:App.LocalizationManager[WelcomeMessage]}"
+            HorizontalOptions="Center"
                HorizontalTextAlignment="Center"
                FontSize="35"
                Grid.ColumnSpan="2"
