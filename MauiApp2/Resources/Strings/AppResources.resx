@@ -120,4 +120,67 @@
   <data name="WelcomeMessage" xml:space="preserve">
     <value>Добро пожаловать в Алькино</value>
   </data>
+  <data name="Name" xml:space="preserve">
+    <value>Имя</value>
+  </data>
+  <data name="Welcome" xml:space="preserve">
+    <value>Добро пожаловать</value>
+  </data>
+  <data name="NextSign" xml:space="preserve">
+    <value>Ближайшая запись</value>
+  </data>
+  <data name="Main" xml:space="preserve">
+    <value>Главная</value>
+  </data>
+  <data name="News" xml:space="preserve">
+    <value>Новости</value>
+  </data>
+  <data name="Profile" xml:space="preserve">
+    <value>Профиль</value>
+  </data>
+  <data name="ProfileStr" xml:space="preserve">
+    <value>Запись на прием</value>
+  </data>
+  <data name="Infor" xml:space="preserve">
+    <value>Контактная информация</value>
+  </data>
+  <data name="Mestop" xml:space="preserve">
+    <value>Местоположение: с.Алькино ул.Кольцевая д.6</value>
+  </data>
+  <data name="Phone" xml:space="preserve">
+    <value>Контактный телефон: 7(34777)2-65-46</value>
+  </data>
+  <data name="email" xml:space="preserve">
+    <value>Электронная почта:alkino_administr@mail.ru</value>
+  </data>
+  <data name="usluga" xml:space="preserve">
+    <value>Выбрать услугу</value>
+  </data>
+  <data name="DATE" xml:space="preserve">
+    <value>Выбрать дату</value>
+  </data>
+  <data name="Time" xml:space="preserve">
+    <value>Выбрать время</value>
+  </data>
+  <data name="Comment" xml:space="preserve">
+    <value>Примечание(необязательно)</value>
+  </data>
+  <data name="Sign" xml:space="preserve">
+    <value>Записаться</value>
+  </data>
+  <data name="UserEmail" xml:space="preserve">
+    <value>Электронная почта</value>
+  </data>
+  <data name="SelectLang" xml:space="preserve">
+    <value>Выберите язык</value>
+  </data>
+  <data name="Save" xml:space="preserve">
+    <value>Сохранить</value>
+  </data>
+  <data name="all" xml:space="preserve">
+    <value>Все записи</value>
+  </data>
+  <data name="Back" xml:space="preserve">
+    <value>Назад</value>
+  </data>
 </root>

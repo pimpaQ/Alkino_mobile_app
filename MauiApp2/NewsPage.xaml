@@ -2,9 +2,10 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MauiApp1.NewsPage"
+             xmlns:resx="clr-namespace:MauiApp1.Resources.Strings"
              NavigationPage.HasNavigationBar="False">
     <Grid RowDefinitions="50,*,0">
-        <Label Text="Новости" FontSize="24" FontAttributes="Bold" HorizontalOptions="Center" Grid.Row="0" Margin="10" />
+        <Label Text="{x:Static resx:AppResources.News}" FontSize="24" FontAttributes="Bold" HorizontalOptions="Center" Grid.Row="0" Margin="10" />
         <ScrollView Grid.Row="1">
         <CollectionView x:Name="NewsCollectionView"
                         Grid.Row="1"
@@ -28,19 +29,19 @@
         <StackLayout Orientation="Horizontal" HorizontalOptions="Center" VerticalOptions="End" BackgroundColor="White"  WidthRequest="390" Grid.Row="2" HeightRequest="75" Margin="0,50,0,0">
             <StackLayout HorizontalOptions="Center" VerticalOptions="Center" Margin="20, 0, 0, 0">
                 <ImageButton Source="mainpage.png" WidthRequest="40" HeightRequest="40" x:Name="mainPageBtn" Clicked="mainPageBtn_Clicked"/>
-                <Label Text="Главная" FontSize="10" HorizontalTextAlignment="Center"/>
+                <Label Text="{x:Static resx:AppResources.Main}" FontSize="10" HorizontalTextAlignment="Center"/>
             </StackLayout>
             <StackLayout Orientation="Vertical" VerticalOptions="Center" HorizontalOptions="Center" Margin="40,0,0,0">
                 <ImageButton Source="newsicopng.png" WidthRequest="60" HeightRequest="40"/>
-                <Label Text="Новости" FontSize="10" HorizontalTextAlignment="Center"/>
+                <Label Text="{x:Static resx:AppResources.News}" FontSize="10" HorizontalTextAlignment="Center"/>
             </StackLayout>
             <StackLayout HorizontalOptions="Center" VerticalOptions="Center" Margin="30, 0, 0, 0">
                 <ImageButton Source="entrypage.png" WidthRequest="40" HeightRequest="40" x:Name="EntryPageBtn" Clicked="EntryPageBtn_Clicked"/>
-                <Label Text="Запись на прием" FontSize="10" HorizontalTextAlignment="Center" />
+                <Label Text="{x:Static resx:AppResources.ProfileStr}" FontSize="10" HorizontalTextAlignment="Center" />
             </StackLayout>
             <StackLayout HorizontalOptions="Center" VerticalOptions="Center" Margin="40, 0, 0, 0">
                 <ImageButton Source="profilepage.png" WidthRequest="40" HeightRequest="40" x:Name="profileBtn" Clicked="profileBtn_Clicked"/>
-                <Label Text="Профиль" FontSize="10" HorizontalTextAlignment="Center" />
+                <Label Text="{x:Static resx:AppResources.Profile}" FontSize="10" HorizontalTextAlignment="Center" />
             </StackLayout>
         </StackLayout>
     </Grid>

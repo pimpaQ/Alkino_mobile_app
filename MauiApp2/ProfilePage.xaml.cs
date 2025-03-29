@@ -1,5 +1,6 @@
-using MauiApp1.Data;
+п»їusing MauiApp1.Data;
 using MauiApp1.Models;
+using System.Globalization;
 
 namespace MauiApp1;
 
@@ -13,12 +14,16 @@ public partial class ProfilePage : ContentPage
     {
         InitializeComponent();
         BindingContext = this;
+        if(langlab.Text == "Р’С‹Р±РµСЂРёС‚Рµ СЏР·С‹Рє")
+            LangPicker.SelectedIndex = 0;
+        else
+            LangPicker.SelectedIndex = 1;
         LoadUserData();
     }
 
     private async void LoadUserData()
     {
-        var userId = Session.CurrentUserId; // Получаем ID текущего пользователя
+        var userId = Session.CurrentUserId; // РџРѕР»СѓС‡Р°РµРј ID С‚РµРєСѓС‰РµРіРѕ РїРѕР»СЊР·РѕРІР°С‚РµР»СЏ
         var user = await DatabaseService.Database.Table<Users>()
                         .FirstOrDefaultAsync(u => u.UserID == userId);
 
@@ -50,16 +55,33 @@ public partial class ProfilePage : ContentPage
         var userId = Session.CurrentUserId;
         var user = await DatabaseService.Database.Table<Users>()
                         .FirstOrDefaultAsync(u => u.UserID == userId);
-
+        string langCode;
         if (user != null)
         {
-            user.Email = Email; // Обновляем почту
-            await DatabaseService.Database.UpdateAsync(user); // Сохраняем изменения
-            await DisplayAlert("Успех", "Данные сохранены.", "ОК");
+            if (LangPicker.SelectedIndex == 1)
+            {
+                langCode = "ba";
+                LangPicker.SelectedIndex = 1;
+            }
+            else
+            {
+                langCode = "ru";
+                LangPicker.SelectedIndex = 0;
+            }
+            Preferences.Set("AppLanguage", langCode);
+            CultureInfo culture = new CultureInfo(langCode);
+            CultureInfo.DefaultThreadCurrentCulture = culture;
+            CultureInfo.DefaultThreadCurrentUICulture = culture;
+
+            user.Email = Email; // РћР±РЅРѕРІР»СЏРµРј РїРѕС‡С‚Сѓ
+            await DatabaseService.Database.UpdateAsync(user); // РЎРѕС…СЂР°РЅСЏРµРј РёР·РјРµРЅРµРЅРёСЏ
+            await DisplayAlert("РЈСЃРїРµС…", "Р”Р°РЅРЅС‹Рµ СЃРѕС…СЂР°РЅРµРЅС‹.", "РћРљ");
+            Navigation.InsertPageBefore(new NewPage1(), this);
+            await Navigation.PopAsync();
         }
         else
         {
-            await DisplayAlert("Ошибка", "Не удалось найти пользователя.", "ОК");
+            await DisplayAlert("РћС€РёР±РєР°", "РќРµ СѓРґР°Р»РѕСЃСЊ РЅР°Р№С‚Рё РїРѕР»СЊР·РѕРІР°С‚РµР»СЏ.", "РћРљ");
         }
     }
 

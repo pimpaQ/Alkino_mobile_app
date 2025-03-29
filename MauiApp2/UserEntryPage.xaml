@@ -2,9 +2,10 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MauiApp1.UserEntryPage"
+             xmlns:resx="clr-namespace:MauiApp1.Resources.Strings"
              NavigationPage.HasBackButton="False">
     <ContentPage.ToolbarItems>
-        <ToolbarItem Text="Назад" Clicked="GoBack_Clicked"/>
+        <ToolbarItem Text="{x:Static resx:AppResources.Back}" Clicked="GoBack_Clicked"/>
     </ContentPage.ToolbarItems>
     <Grid>
         <Grid.RowDefinitions>
@@ -12,8 +13,8 @@
             <RowDefinition Height="auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-    
-        <Label Text="Все записи" 
+
+        <Label Text="{x:Static resx:AppResources.all}" 
                FontSize="30" 
                FontAttributes="Bold" 
                TextColor="#925EE6"

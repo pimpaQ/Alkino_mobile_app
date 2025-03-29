@@ -1,5 +1,6 @@
 using MauiApp1.Data;
 using MauiApp1.Models;
+using MauiApp1.Resources.Strings;
 using MauiApp1.VKApi;
 using System.Collections.ObjectModel;
 
@@ -22,7 +23,9 @@ namespace MauiApp1
             var userId = Session.CurrentUserId; // Идентификатор пользователя из сессии
             var currentUser = await DatabaseService.Database.Table<Users>()
                                       .FirstOrDefaultAsync(u => u.UserID == userId);
-            UserName = $"Добро пожаловать, {currentUser.Name}!";
+            string welcomeText = AppResources.Welcome;
+            UserName = welcomeText + ", " + currentUser.Name;
+              
             OnPropertyChanged(nameof(UserName));
             // Получаем записи текущего пользователя, отсортированные по дате и времени
             var entries = await DatabaseService.Database.Table<Entry>()

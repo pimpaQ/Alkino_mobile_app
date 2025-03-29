@@ -120,4 +120,67 @@
   <data name="WelcomeMessage" xml:space="preserve">
     <value>Рәхим итегеҙ Әлкәгә</value>
   </data>
+  <data name="Name" xml:space="preserve">
+    <value>Исем</value>
+  </data>
+  <data name="Welcome" xml:space="preserve">
+    <value>Рәхим итегеҙ</value>
+  </data>
+  <data name="NextSign" xml:space="preserve">
+    <value>Киләһе яҙылыу</value>
+  </data>
+  <data name="Main" xml:space="preserve">
+    <value>Төп</value>
+  </data>
+  <data name="News" xml:space="preserve">
+    <value>Яңылыҡтар</value>
+  </data>
+  <data name="Profile" xml:space="preserve">
+    <value>Сәхифә</value>
+  </data>
+  <data name="ProfileStr" xml:space="preserve">
+    <value>Приемға яҙылыш</value>
+  </data>
+  <data name="Infor" xml:space="preserve">
+    <value>Бәйләнеш мәғлүмәттәре</value>
+  </data>
+  <data name="Mestop" xml:space="preserve">
+    <value>Урынлашыу: Әлкә а. Кольцевая урамы, 6-сы йорт.</value>
+  </data>
+  <data name="Phone" xml:space="preserve">
+    <value>Элемтә телефоны: 7(34777)2-65-46</value>
+  </data>
+  <data name="email" xml:space="preserve">
+    <value>Электрон почта:alkino_administr@mail.ru</value>
+  </data>
+  <data name="usluga" xml:space="preserve">
+    <value>Хеҙмәтте һайлау</value>
+  </data>
+  <data name="DATE" xml:space="preserve">
+    <value>Көндө һайлау</value>
+  </data>
+  <data name="Time" xml:space="preserve">
+    <value>Ваҡытты һайлау</value>
+  </data>
+  <data name="Comment" xml:space="preserve">
+    <value>Иҫкәрмә(мәжбүри түгел)</value>
+  </data>
+  <data name="Sign" xml:space="preserve">
+    <value>Яҙылырға</value>
+  </data>
+  <data name="UserEmail" xml:space="preserve">
+    <value>Электрон почта</value>
+  </data>
+  <data name="SelectLang" xml:space="preserve">
+    <value>Телде һайлағыҙ</value>
+  </data>
+  <data name="Save" xml:space="preserve">
+    <value>Һаҡларға</value>
+  </data>
+  <data name="all" xml:space="preserve">
+    <value>Бөтә яҙылыштар</value>
+  </data>
+  <data name="Back" xml:space="preserve">
+    <value>Артҡа</value>
+  </data>
 </root>

@@ -2,6 +2,7 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MauiApp1.ProfilePage"
+             xmlns:resx="clr-namespace:MauiApp1.Resources.Strings"
              NavigationPage.HasNavigationBar="False">
     <Grid Padding="20" RowDefinitions="*,*,*,*,*,*,*,*" ColumnDefinitions="*">
         <!-- Заголовок -->
@@ -34,7 +35,7 @@
                HasShadow="False"
                Grid.Row="3">
             <StackLayout Orientation="Vertical">
-                <Label Text="Электронная почта"
+                <Label Text="{x:Static resx:AppResources.UserEmail}"
                        FontSize="14"
                        TextColor="White"/>
                 <Entry Text="{Binding Email}" 
@@ -69,7 +70,7 @@
                HasShadow="False"
                Grid.Row="5">
             <StackLayout Orientation="Vertical">
-                <Label Text="Выберите язык" TextColor="White"/>
+                <Label Text="{x:Static resx:AppResources.SelectLang}" TextColor="White" x:Name="langlab"/>
                 <Picker SelectedIndex="0" FontSize="14" x:Name="LangPicker" TextColor="White">
                     <Picker.Items>
                         <x:String>Русский</x:String>
@@ -84,7 +85,7 @@
                 HeightRequest="40" 
                 WidthRequest="200" 
                 Margin="15" 
-                Text="Сохранить" 
+                Text="{x:Static resx:AppResources.Save}" 
                 BackgroundColor="#7C4DFF" 
                 x:Name="SaveBtn"
                 Clicked="SaveBtn_Clicked"/>
@@ -93,19 +94,19 @@
         <StackLayout Orientation="Horizontal" HorizontalOptions="Center" VerticalOptions="Center" BackgroundColor="White"  WidthRequest="390" Grid.Row="7" HeightRequest="70" Margin="0,50,0,0">
             <StackLayout HorizontalOptions="Center" VerticalOptions="Center" Margin="20, 0, 0, 0">
                 <ImageButton Source="mainpage.png" WidthRequest="40" HeightRequest="40" x:Name="mainPageBtn" Clicked="mainPageBtn_Clicked"/>
-                <Label Text="Главная" FontSize="10" HorizontalTextAlignment="Center" />
+                <Label Text="{x:Static resx:AppResources.Main}" FontSize="10" HorizontalTextAlignment="Center" />
             </StackLayout>
             <StackLayout Orientation="Vertical" VerticalOptions="Center" HorizontalOptions="Center" Margin="40,0,0,0">
                 <ImageButton Source="newsicopng.png" WidthRequest="60" HeightRequest="40" x:Name="newsBtn" Clicked="newsBtn_Clicked"/>
-                <Label Text="Новости" FontSize="10" HorizontalTextAlignment="Center"/>
+                <Label Text="{x:Static resx:AppResources.News}" FontSize="10" HorizontalTextAlignment="Center"/>
             </StackLayout>
             <StackLayout HorizontalOptions="Center" VerticalOptions="Center" Margin="30, 0, 0, 0">
                 <ImageButton Source="entrypage.png" WidthRequest="40" HeightRequest="40" x:Name="EntryPageBtn" Clicked="EntryPageBtn_Clicked"/>
-                <Label Text="Запись на прием" FontSize="10" HorizontalTextAlignment="Center" />
+                <Label Text="{x:Static resx:AppResources.ProfileStr}" FontSize="10" HorizontalTextAlignment="Center" />
             </StackLayout>
             <StackLayout HorizontalOptions="Center" VerticalOptions="Center" Margin="40, 0, 0, 0">
                 <ImageButton Source="profilepage.png" WidthRequest="40" HeightRequest="40" />
-                <Label Text="Профиль" FontSize="10" HorizontalTextAlignment="Center" />
+                <Label Text="{x:Static resx:AppResources.Profile}" FontSize="10" HorizontalTextAlignment="Center" />
             </StackLayout>
         </StackLayout>
     </Grid>

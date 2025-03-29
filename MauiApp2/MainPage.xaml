@@ -57,7 +57,7 @@
                 Clicked="EnterButton"
                 x:Name="AuthorizationBtn"/>
 
-        <Label Text="{x:Static local:App.LocalizationManager[WelcomeMessage]}"
+        <Label Text="{x:Static resx:AppResources.WelcomeMessage}"
             HorizontalOptions="Center"
                HorizontalTextAlignment="Center"
                FontSize="35"

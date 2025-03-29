@@ -2,6 +2,7 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MauiApp1.EntryPage"
+             xmlns:resx="clr-namespace:MauiApp1.Resources.Strings"
              NavigationPage.HasNavigationBar="False">
     <Grid Padding="10">
         <Grid.RowDefinitions>
@@ -25,7 +26,7 @@
             HorizontalOptions="Center"/>
 
         <StackLayout Grid.Row="1" Margin="0,60,0,0">
-            <Picker x:Name="picker" Title="Выбрать услугу" TextColor="White" >
+            <Picker x:Name="picker" Title="{x:Static resx:AppResources.usluga}" TextColor="White" >
                 <Picker.ItemsSource>
                     <x:Array Type="{x:Type x:String}">
                         <x:String>Переустройство/перепланировка помещения в многоквартирном доме</x:String>
@@ -41,16 +42,16 @@
         </StackLayout>
 
         <StackLayout Grid.Row="2" Orientation="Vertical" Margin="0,40,0,0">
-            <Label Text="Выбрать дату" TextColor="White"/>
+            <Label Text="{x:Static resx:AppResources.DATE}" TextColor="White"/>
             <DatePicker  x:Name="DateSelector" TextColor="White"/>
         </StackLayout>
 
         <StackLayout Orientation="Vertical" Grid.Row="3" Margin="0,40,0,0">
-            <Label Text="Выбрать время" TextColor="White"/>
+            <Label Text="{x:Static resx:AppResources.Time}" TextColor="White"/>
             <TimePicker  x:Name="TimeSelector" TextColor="White"/>
         </StackLayout>
         <StackLayout Orientation="Vertical" Grid.Row="4" Margin="0,40,0,0">
-            <Label Text="Примечание(не обязательно)" TextColor="White"/>
+            <Label Text="{x:Static resx:AppResources.Comment}" TextColor="White"/>
             <Entry x:Name="DescriptionEditor" TextColor="White"/>
         </StackLayout>        
         
@@ -59,7 +60,7 @@
                 Grid.RowSpan="6" 
                 HeightRequest="50" 
                 WidthRequest="300"
-                Text="Записаться"
+                Text="{x:Static resx:AppResources.Sign}"
                 x:Name="EntryBtn"
                 Clicked="EntryBtn_Clicked"
                 BackgroundColor="White"
@@ -68,19 +69,19 @@
         <StackLayout Orientation="Horizontal" HorizontalOptions="Center" VerticalOptions="Center"  Grid.Row="7" HeightRequest="70"  BackgroundColor="#F2F2F2" WidthRequest="390" Margin="0,50,0,0">
             <StackLayout HorizontalOptions="Center" VerticalOptions="Center" Margin="20, 0, 0, 0">
                 <ImageButton Source="mainpage.png" WidthRequest="40" HeightRequest="40" x:Name="mainpageBtn" Clicked="mainpageBtn_Clicked"/>
-                <Label Text="Главная" FontSize="10" HorizontalTextAlignment="Center" />
+                <Label Text="{x:Static resx:AppResources.Main}" FontSize="10" HorizontalTextAlignment="Center" />
             </StackLayout>
             <StackLayout Orientation="Vertical" VerticalOptions="Center" HorizontalOptions="Center" Margin="40,0,0,0">
                 <ImageButton Source="newsicopng.png" WidthRequest="60" HeightRequest="40" x:Name="newsBtn" Clicked="newsBtn_Clicked"/>
-                <Label Text="Новости" FontSize="10" HorizontalTextAlignment="Center"/>
+                <Label Text="{x:Static resx:AppResources.News}" FontSize="10" HorizontalTextAlignment="Center"/>
             </StackLayout>
             <StackLayout HorizontalOptions="Center" VerticalOptions="Center" Margin="30, 0, 0, 0">
                 <ImageButton Source="entrypage.png" WidthRequest="40" HeightRequest="40" x:Name="ToEntryPage"/>
-                <Label Text="Запись на прием" FontSize="10" HorizontalTextAlignment="Center" />
+                <Label Text="{x:Static resx:AppResources.ProfileStr}" FontSize="10" HorizontalTextAlignment="Center" />
             </StackLayout>
             <StackLayout HorizontalOptions="Center" VerticalOptions="Center" Margin="40, 0, 0, 0">
                 <ImageButton Source="profilepage.png" WidthRequest="40" HeightRequest="40" x:Name="profilepageBtn" Clicked="profilepageBtn_Clicked" />
-                <Label Text="Профиль" FontSize="10" HorizontalTextAlignment="Center" />
+                <Label Text="{x:Static resx:AppResources.Profile}" FontSize="10" HorizontalTextAlignment="Center" />
             </StackLayout>
         </StackLayout>
     </Grid>
