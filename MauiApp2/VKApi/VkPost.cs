@@ -30,7 +30,7 @@ namespace MauiApp1.VKApi
                 var firstParagraph = paragraphs[0];
 
                 // Если первый абзац короче 20 символов
-                if (firstParagraph.Length < 20)
+                if (firstParagraph.Length < 40)
                 {
                     // Добавляем второй абзац, если он существует
                     if (paragraphs.Length > 1)
@@ -39,7 +39,7 @@ namespace MauiApp1.VKApi
                     }
 
                     // Добавляем третий абзац, если первый и второй абзацы все еще короткие
-                    if (firstParagraph.Length < 50 && paragraphs.Length > 2)
+                    if (firstParagraph.Length < 100 && paragraphs.Length > 2)
                     {
                         firstParagraph += " " + paragraphs[2];
                     }

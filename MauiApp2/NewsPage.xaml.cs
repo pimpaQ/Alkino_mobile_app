@@ -20,56 +20,87 @@ namespace MauiApp1
 
         private async void LoadNews()
         {
-            string accessToken = "3b964a553b964a553b964a556f38b0443533b963b964a555cc1821afaffb2e39442c8ea";
-            string apiVersion = "5.131";
-            string groupId = "-217342443"; // ID группы ВК (отрицательное значение для паблика)
-
-            string url = $"https://api.vk.com/method/wall.get?owner_id={groupId}&count=5&access_token={accessToken}&v={apiVersion}";
-
-            using var client = new HttpClient();
-            var response = await client.GetStringAsync(url);
-
-            // Разбираем JSON-ответ
-            var jsonDoc = JsonDocument.Parse(response);
-            var posts = jsonDoc.RootElement.GetProperty("response").GetProperty("items");
-
-            VkPosts.Clear();
-
-            foreach (var post in posts.EnumerateArray())
+            try
             {
-                string text = post.GetProperty("text").GetString();
-                string postUrl = $"https://vk.com/wall{groupId}_{post.GetProperty("id").GetInt32()}";
+                string accessToken = "3b964a553b964a553b964a556f38b0443533b963b964a555cc1821afaffb2e39442c8ea";
+                string apiVersion = "5.131";
+                string groupId = "-217342443";
 
-                string imageUrl = null;
-                if (post.TryGetProperty("attachments", out var attachments))
+                string url = $"https://api.vk.com/method/wall.get?owner_id={groupId}&count=15&access_token={accessToken}&v={apiVersion}";
+
+                using var client = new HttpClient();
+                var response = await client.GetStringAsync(url);
+
+                var jsonDoc = JsonDocument.Parse(response);
+                var posts = jsonDoc.RootElement.GetProperty("response").GetProperty("items");
+
+                VkPosts.Clear();
+
+                foreach (var post in posts.EnumerateArray())
                 {
-                    foreach (var attachment in attachments.EnumerateArray())
+                    string text = post.GetProperty("text").GetString();
+                    string postUrl = $"https://vk.com/wall{groupId}_{post.GetProperty("id").GetInt32()}";
+                    string imageUrl = null;
+
+                    // Если это репост, получаем оригинальный текст и вложения
+                    JsonElement attachmentsSource = post;
+                    if (string.IsNullOrWhiteSpace(text) && post.TryGetProperty("copy_history", out var copyHistory))
                     {
-                        if (attachment.GetProperty("type").GetString() == "photo")
+                        var originalPost = copyHistory[0];
+                        text = originalPost.GetProperty("text").GetString();
+                        attachmentsSource = originalPost;
+                    }
+
+                    // Поиск фото или видео
+                    if (attachmentsSource.TryGetProperty("attachments", out var attachments))
+                    {
+                        foreach (var attachment in attachments.EnumerateArray())
                         {
-                            var photo = attachment.GetProperty("photo");
-                            imageUrl = photo
-                                .GetProperty("sizes")
-                                .EnumerateArray()
-                                .OrderByDescending(size => size.GetProperty("width").GetInt32())
-                                .First()
-                                .GetProperty("url")
-                                .GetString();
-                            break;
+                            string type = attachment.GetProperty("type").GetString();
+
+                            if (type == "photo")
+                            {
+                                var photo = attachment.GetProperty("photo");
+                                imageUrl = photo
+                                    .GetProperty("sizes")
+                                    .EnumerateArray()
+                                    .OrderByDescending(size => size.GetProperty("width").GetInt32())
+                                    .First()
+                                    .GetProperty("url")
+                                    .GetString();
+                                break;
+                            }
+                            else if (type == "video")
+                            {
+                                var video = attachment.GetProperty("video");
+                                if (video.TryGetProperty("image", out var images))
+                                {
+                                    imageUrl = images
+                                        .EnumerateArray()
+                                        .OrderByDescending(img => img.GetProperty("width").GetInt32())
+                                        .First()
+                                        .GetProperty("url")
+                                        .GetString();
+                                    break;
+                                }
+                            }
                         }
                     }
+
+                    VkPosts.Add(new VkPost
+                    {
+                        Text = text,
+                        ImageUrl = imageUrl,
+                        PostUrl = postUrl
+                    });
                 }
 
-                VkPosts.Add(new VkPost
-                {
-                    Text = text,
-                    ImageUrl = imageUrl,
-                    PostUrl = postUrl
-                });
+                NewsCollectionView.ItemsSource = VkPosts;
             }
-
-            // Устанавливаем данные в CollectionView
-            NewsCollectionView.ItemsSource = VkPosts;
+            catch (Exception ex)
+            {
+                await DisplayAlert("Ошибка", "Не удалось загрузить новости: " + ex.Message, "OK");
+            }
         }
 
         private async void OpenPost_Clicked(object sender, EventArgs e)
