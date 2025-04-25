@@ -26,19 +26,7 @@
             HorizontalOptions="Center"/>
 
         <StackLayout Grid.Row="1" Margin="0,60,0,0">
-            <Picker x:Name="picker" Title="{x:Static resx:AppResources.usluga}" TextColor="White" >
-                <Picker.ItemsSource>
-                    <x:Array Type="{x:Type x:String}">
-                        <x:String>Переустройство/перепланировка помещения в многоквартирном доме</x:String>
-                        <x:String>Принять на учет гражданина, нуждающимся в жил.помещениях</x:String>
-                        <x:String>Бытовая характеристика гражданина</x:String>
-                        <x:String>Справка о составе семьи</x:String>
-                        <x:String>Выписка из ЕГРН</x:String>
-                        <x:String>Справка с места жительства умершего</x:String>
-                        <x:String>Разрешение на захоронение</x:String>
-                    </x:Array>
-                </Picker.ItemsSource>
-            </Picker>
+            <Picker x:Name="picker" Title="{x:Static resx:AppResources.usluga}" TextColor="White" />
         </StackLayout>
 
         <StackLayout Grid.Row="2" Orientation="Vertical" Margin="0,40,0,0">
@@ -48,7 +36,7 @@
 
         <StackLayout Orientation="Vertical" Grid.Row="3" Margin="0,40,0,0">
             <Label Text="{x:Static resx:AppResources.Time}" TextColor="White"/>
-            <TimePicker  x:Name="TimeSelector" TextColor="White"/>
+            <Picker  x:Name="TimeSelector" TextColor="White"/>
         </StackLayout>
         <StackLayout Orientation="Vertical" Grid.Row="4" Margin="0,40,0,0">
             <Label Text="{x:Static resx:AppResources.Comment}" TextColor="White"/>

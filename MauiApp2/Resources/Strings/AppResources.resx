@@ -183,4 +183,43 @@
   <data name="Back" xml:space="preserve">
     <value>Назад</value>
   </data>
+  <data name="r1" xml:space="preserve">
+    <value>Переустройство/перепланировка помещения в многоквартирном доме</value>
+  </data>
+  <data name="r2" xml:space="preserve">
+    <value>Принять на учет гражданина, нуждающимся в жил.помещениях</value>
+  </data>
+  <data name="r3" xml:space="preserve">
+    <value>Бытовая характеристика гражданина</value>
+  </data>
+  <data name="r4" xml:space="preserve">
+    <value>Справка о составе семьи</value>
+  </data>
+  <data name="r5" xml:space="preserve">
+    <value>Выписка из ЕГРН</value>
+  </data>
+  <data name="r6" xml:space="preserve">
+    <value>Справка с места жительства умершего</value>
+  </data>
+  <data name="r7" xml:space="preserve">
+    <value>Разрешение на захоронение</value>
+  </data>
+  <data name="errorMsg" xml:space="preserve">
+    <value>Ошибка</value>
+  </data>
+  <data name="reasonChoose" xml:space="preserve">
+    <value>Пожалуйста, выберите услугу</value>
+  </data>
+  <data name="dateChoose" xml:space="preserve">
+    <value>Пожалуйста, выберите дату</value>
+  </data>
+  <data name="chooseTime" xml:space="preserve">
+    <value>Пожалуйста, выберите время</value>
+  </data>
+  <data name="successMsg" xml:space="preserve">
+    <value>Успех</value>
+  </data>
+  <data name="prMsg" xml:space="preserve">
+    <value>Вы записались на приём!</value>
+  </data>
 </root>

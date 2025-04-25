@@ -79,6 +79,15 @@ namespace MauiApp1.Resources.Strings {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Пожалуйста, выберите время.
+        /// </summary>
+        internal static string chooseTime {
+            get {
+                return ResourceManager.GetString("chooseTime", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Примечание(необязательно).
         /// </summary>
         internal static string Comment {
@@ -97,11 +106,29 @@ namespace MauiApp1.Resources.Strings {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Пожалуйста, выберите дату.
+        /// </summary>
+        internal static string dateChoose {
+            get {
+                return ResourceManager.GetString("dateChoose", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Электронная почта:alkino_administr@mail.ru.
         /// </summary>
         internal static string email {
             get {
                 return ResourceManager.GetString("email", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Ошибка.
+        /// </summary>
+        internal static string errorMsg {
+            get {
+                return ResourceManager.GetString("errorMsg", resourceCulture);
             }
         }
         
@@ -169,6 +196,15 @@ namespace MauiApp1.Resources.Strings {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Вы записались на приём!.
+        /// </summary>
+        internal static string prMsg {
+            get {
+                return ResourceManager.GetString("prMsg", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Профиль.
         /// </summary>
         internal static string Profile {
@@ -183,6 +219,78 @@ namespace MauiApp1.Resources.Strings {
         internal static string ProfileStr {
             get {
                 return ResourceManager.GetString("ProfileStr", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Переустройство/перепланировка помещения в многоквартирном доме.
+        /// </summary>
+        internal static string r1 {
+            get {
+                return ResourceManager.GetString("r1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Принять на учет гражданина, нуждающимся в жил.помещениях.
+        /// </summary>
+        internal static string r2 {
+            get {
+                return ResourceManager.GetString("r2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Бытовая характеристика гражданина.
+        /// </summary>
+        internal static string r3 {
+            get {
+                return ResourceManager.GetString("r3", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Справка о составе семьи.
+        /// </summary>
+        internal static string r4 {
+            get {
+                return ResourceManager.GetString("r4", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Выписка из ЕГРН.
+        /// </summary>
+        internal static string r5 {
+            get {
+                return ResourceManager.GetString("r5", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Справка с места жительства умершего.
+        /// </summary>
+        internal static string r6 {
+            get {
+                return ResourceManager.GetString("r6", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Разрешение на захоронение.
+        /// </summary>
+        internal static string r7 {
+            get {
+                return ResourceManager.GetString("r7", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Пожалуйста, выберите услугу.
+        /// </summary>
+        internal static string reasonChoose {
+            get {
+                return ResourceManager.GetString("reasonChoose", resourceCulture);
             }
         }
         
@@ -210,6 +318,15 @@ namespace MauiApp1.Resources.Strings {
         internal static string Sign {
             get {
                 return ResourceManager.GetString("Sign", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Успех.
+        /// </summary>
+        internal static string successMsg {
+            get {
+                return ResourceManager.GetString("successMsg", resourceCulture);
             }
         }
         

@@ -183,4 +183,43 @@
   <data name="Back" xml:space="preserve">
     <value>Артҡа</value>
   </data>
+  <data name="r1" xml:space="preserve">
+    <value>Күп фатирлы йортта бинаны яңынан ҡороу/үҙгәртеп планлаштырыу</value>
+  </data>
+  <data name="r2" xml:space="preserve">
+    <value>Торлаҡҡа мохтаж граждандарҙы иҫәпкә ҡуйыу</value>
+  </data>
+  <data name="r3" xml:space="preserve">
+    <value>Граждандың көнкүреш характеристикаһы</value>
+  </data>
+  <data name="r4" xml:space="preserve">
+    <value>Ғаилә составы тураһында белешмә</value>
+  </data>
+  <data name="r5" xml:space="preserve">
+    <value>ЕГРН-ҙан күсермә (Берҙәм дәүләт күсемһеҙ милек реестры)</value>
+  </data>
+  <data name="r6" xml:space="preserve">
+    <value>Вафат булғандың йәшәгән урынынан белешмә</value>
+  </data>
+  <data name="r7" xml:space="preserve">
+    <value>Ерләүгә рөхсәт</value>
+  </data>
+  <data name="errorMsg" xml:space="preserve">
+    <value>Хаталыҡ</value>
+  </data>
+  <data name="reasonChoose" xml:space="preserve">
+    <value>Зинһар, хеҙмәтте һайлағыҙ</value>
+  </data>
+  <data name="dateChoose" xml:space="preserve">
+    <value>Зинһар, көндө һайлағыҙ</value>
+  </data>
+  <data name="chooseTime" xml:space="preserve">
+    <value>Зинһар, выҡытты һайлағыҙ</value>
+  </data>
+  <data name="successMsg" xml:space="preserve">
+    <value>Уңыш</value>
+  </data>
+  <data name="prMsg" xml:space="preserve">
+    <value>Һеҙ ҡабул итеүгә яҙылдығыҙ!</value>
+  </data>
 </root>
