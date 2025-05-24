@@ -222,4 +222,13 @@
   <data name="prMsg" xml:space="preserve">
     <value>Һеҙ ҡабул итеүгә яҙылдығыҙ!</value>
   </data>
+  <data name="s2" xml:space="preserve">
+    <value>Раҫлау көтөлә</value>
+  </data>
+  <data name="s1" xml:space="preserve">
+    <value>Раҫланған</value>
+  </data>
+  <data name="s3" xml:space="preserve">
+    <value>Кире ҡағылған</value>
+  </data>
 </root>

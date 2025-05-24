@@ -40,11 +40,14 @@ namespace MauiApp1
                 entry.Reason = await DatabaseService.Database.Table<ReasonList>()
                                           .FirstOrDefaultAsync(r => r.ReasonListId == entry.ReasonID);
             }
+
             // Устанавливаем ближайшую запись и остальные
             if (entries.Any())
             {
                 var nearestEntry = entries.First(); // Ближайшая запись
                 entries.RemoveAt(0); // Удаляем ближайшую из списка остальных
+
+                nearestEntry.Reason.ReasonName = Entry.GetLocalizedReason(nearestEntry.Reason.ReasonName);
 
                 // Устанавливаем данные для привязки
                 UserEntries = new ObservableCollection<Entry>(entries);

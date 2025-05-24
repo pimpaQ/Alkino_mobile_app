@@ -32,7 +32,7 @@
                 <DataTemplate>
                     <Frame Padding="10" BackgroundColor="#925EE6" CornerRadius="10" Margin="5">
                         <StackLayout>
-                            <Label Text="{Binding Reason.ReasonName}" TextColor="White" FontSize="16" FontAttributes="Bold" />
+                            <Label Text="{Binding ReasonLocalized}" TextColor="White" FontSize="16" FontAttributes="Bold" />
                             <Label Text="{Binding Date}" TextColor="White" FontSize="14" />
                             <Label Text="{Binding Time}" TextColor="White" FontSize="14" />
                             <Label Text="{Binding Description}" TextColor="White" FontSize="12" />

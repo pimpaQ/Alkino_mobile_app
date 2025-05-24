@@ -222,4 +222,15 @@
   <data name="prMsg" xml:space="preserve">
     <value>Вы записались на приём!</value>
   </data>
+  <data name="s2" xml:space="preserve">
+    <value>Ожидает подтверждения</value>
+    <comment>Раҫлауҙы көтөлә</comment>
+  </data>
+  <data name="s1" xml:space="preserve">
+    <value>Подтверждена</value>
+    <comment>Раҫланған</comment>
+  </data>
+  <data name="s3" xml:space="preserve">
+    <value>Отклонено</value>
+  </data>
 </root>

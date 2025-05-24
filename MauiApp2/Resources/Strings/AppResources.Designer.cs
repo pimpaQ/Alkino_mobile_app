@@ -295,6 +295,33 @@ namespace MauiApp1.Resources.Strings {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Подтверждена.
+        /// </summary>
+        internal static string s1 {
+            get {
+                return ResourceManager.GetString("s1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Ожидает подтверждения.
+        /// </summary>
+        internal static string s2 {
+            get {
+                return ResourceManager.GetString("s2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Отклонено.
+        /// </summary>
+        internal static string s3 {
+            get {
+                return ResourceManager.GetString("s3", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Сохранить.
         /// </summary>
         internal static string Save {

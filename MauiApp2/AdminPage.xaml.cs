@@ -147,6 +147,7 @@ public partial class AdminPage : ContentPage
             UpdateCurrentEntries(CurrentEntries);
 
             await DisplayAlert("Успех", "Запись успешно подтверждена", "ОК");
+            await Navigation.PushAsync(new AdminPage());
         }
     }
 
@@ -187,6 +188,7 @@ public partial class AdminPage : ContentPage
             UpdateCurrentEntries(RejectedEntries); // Обновляем текущий список
 
             await DisplayAlert("Успех", "Запись успешно отклонена.", "ОК");
+            await Navigation.PushAsync(new AdminPage());
         }
     }
 }

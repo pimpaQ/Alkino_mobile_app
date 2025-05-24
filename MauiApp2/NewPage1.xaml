@@ -59,7 +59,7 @@
                        TextColor="White" 
                        FontSize="14" />
                         </StackLayout>
-                        <Label Text="{Binding NearestEntry.Acces, Converter={StaticResource AccesToStatusConverter}}" 
+                        <Label Text="{Binding NearestEntry.Status}" 
                    TextColor="White" 
                    FontSize="18" 
                    HorizontalOptions="Center"/>
@@ -69,7 +69,7 @@
 
         </StackLayout>
         <ImageButton Source="listicon.png" HeightRequest="30" VerticalOptions="Start" Margin="315,35,0,0" Command="{Binding ShowAllEntriesCommand}" x:Name="EntrylistPage" Clicked="EntrylistPage_Clicked"/>
-        <Frame Margin="4.5,0,4.5,0" Grid.Row="1" CornerRadius="0" HeightRequest="460">
+        <Frame Margin="4.5,40,4.5,0" Grid.Row="1" CornerRadius="0" HeightRequest="460">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"/>

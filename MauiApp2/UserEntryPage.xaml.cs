@@ -34,7 +34,6 @@ public partial class UserEntryPage : ContentPage
             entry.Reason = await DatabaseService.Database.Table<ReasonList>()
                                   .FirstOrDefaultAsync(r => r.ReasonListId == entry.ReasonID);
         }
-
         AllEntries = new ObservableCollection<Entry>(entries);
         FilteredEntries = new ObservableCollection<Entry>(entries.Where(e => e.Acces == 1));
         OnPropertyChanged(nameof(FilteredEntries));

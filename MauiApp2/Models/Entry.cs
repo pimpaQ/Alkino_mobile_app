@@ -1,4 +1,5 @@
 ﻿using MauiApp1.Models;
+using MauiApp1.Resources.Strings;
 using SQLite;
 
 public class Entry
@@ -25,17 +26,39 @@ public class Entry
         {
             if(Acces == 1)
             {
-                return "Подтверждена";
+                return AppResources.s1;
             }
             else if(Acces == 0)
             {
-                return "Ожидает подтверждения";
+                return AppResources.s2;
             }
             else
             {
-                return "Отклонена";
+                return AppResources.s3;
             }
         }
     }
-
+    public static string GetLocalizedReason(string reasonFromDb)
+    {
+        return reasonFromDb switch
+        {
+            "Переустройство/перепланировка помещения в многоквартирном доме" => AppResources.r1,
+            "Принять на учет гражданина, нуждающимся в жил.помещениях" => AppResources.r2,
+            "Бытовая характеристика гражданина" => AppResources.r3,
+            "Справка о составе семьи" => AppResources.r4,
+            "Выписка из ЕГРН" => AppResources.r5,
+            "Справка с места жительства умершего" => AppResources.r6,
+            "Разрешение на захоронение" => AppResources.r7,
+            _ => reasonFromDb
+        };
+    }
+    public string ReasonLocalized
+    {
+        get
+        {
+            return Reason != null
+                ? GetLocalizedReason(Reason.ReasonName)
+                : string.Empty;
+        }
+    }
 }
