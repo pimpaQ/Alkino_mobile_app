@@ -49,6 +49,7 @@ public class Entry
             "Выписка из ЕГРН" => AppResources.r5,
             "Справка с места жительства умершего" => AppResources.r6,
             "Разрешение на захоронение" => AppResources.r7,
+            "Другое" => AppResources.r8,
             _ => reasonFromDb
         };
     }

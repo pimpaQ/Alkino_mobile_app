@@ -1,118 +1,100 @@
-п»їusing MauiApp1.Data;
+using MauiApp1.Data;
 using MauiApp1.Models;
-using Microsoft.EntityFrameworkCore;
+using MauiApp1.Resources.Strings;
+using MauiApp1.VKApi;
 using System.Collections.ObjectModel;
-using System.Text.RegularExpressions;
 
 namespace MauiApp1
 {
-    public partial class MainPage : ContentPage
+    public partial class NewPage1 : ContentPage
     {
-        public MainPage() 
+        public string UserName { get; set; }
+        public ObservableCollection<Entry> UserEntries { get; set; }
+        public Entry NearestEntry { get; set; }
+        public NewPage1()
         {
             InitializeComponent();
-        }
-        
-        private void EnterButton(object sender, EventArgs e)
-        {
-            RegistrView.IsVisible = false;
-            EnterView.IsVisible = true;
-
-            AuthorizationBtn.Background = Colors.White;
-            AuthorizationBtn.TextColor = Colors.Black;
-
-            RegistrationBtn.Background = Colors.Black;
-            RegistrationBtn.TextColor = Colors.White;
+            LoadUserData();
+            BindingContext = this;
         }
 
-        private void RegistrationButton(object sender, EventArgs e)
+        private async void LoadUserData()
         {
-            RegistrView.IsVisible = true;
-            EnterView.IsVisible = false;
+            var userId = Session.CurrentUserId; // Идентификатор пользователя из сессии
+            var currentUser = await DatabaseService.Database.Table<Users>()
+                                      .FirstOrDefaultAsync(u => u.UserID == userId);
+            string welcomeText = AppResources.Welcome;
+            UserName = welcomeText + ", " + currentUser.Name;
 
-            AuthorizationBtn.Background = Colors.Black;
-            AuthorizationBtn.TextColor = Colors.White;
+            OnPropertyChanged(nameof(UserName));
+            // Получаем записи текущего пользователя, отсортированные по дате и времени
+            var entries = await DatabaseService.Database.Table<Entry>()
+                                   .Where(e => e.UserID == userId)
+                                   .OrderBy(e => e.Date)
+                                   .ThenBy(e => e.Time)
+                                   .ToListAsync();
 
-            RegistrationBtn.Background = Colors.White;
-            RegistrationBtn.TextColor = Colors.Black;
+            foreach (var entry in entries)
+            {
+                // Загружаем связанные данные из ReasonList
+                entry.Reason = await DatabaseService.Database.Table<ReasonList>()
+                                          .FirstOrDefaultAsync(r => r.ReasonListId == entry.ReasonID);
+            }
+
+            // Устанавливаем ближайшую запись и остальные
+            if (entries.Any())
+            {
+                var nearestEntry = entries.First(); // Ближайшая запись
+                entries.RemoveAt(0); // Удаляем ближайшую из списка остальных
+
+                nearestEntry.Reason.ReasonName = Entry.GetLocalizedReason(nearestEntry.Reason.ReasonName);
+
+                // Устанавливаем данные для привязки
+                UserEntries = new ObservableCollection<Entry>(entries);
+                NearestEntry = nearestEntry;
+
+            }
+            OnPropertyChanged(nameof(UserEntries));
+            OnPropertyChanged(nameof(NearestEntry));
 
         }
 
-        private async void Button_Clicked(object sender, EventArgs e)
+        private async void profileBtn_Clicked(object sender, EventArgs e)
         {
-            if (string.IsNullOrWhiteSpace(firstName.Text) ||
-        string.IsNullOrWhiteSpace(Name.Text) ||
-        string.IsNullOrWhiteSpace(Patronymic.Text) ||
-        string.IsNullOrWhiteSpace(Phone.Text) ||
-        string.IsNullOrWhiteSpace(passWord.Text))
-            {
-                await DisplayAlert("РћС€РёР±РєР°", "Р’СЃРµ РїРѕР»СЏ РґРѕР»Р¶РЅС‹ Р±С‹С‚СЊ Р·Р°РїРѕР»РЅРµРЅС‹.", "РћРљ");
-                return;
-            }
-
-            if (!Regex.IsMatch(Phone.Text, @"^\+7\d{10}$"))
-            {
-                await DisplayAlert("РћС€РёР±РєР°", "Р’РІРµРґРёС‚Рµ РЅРѕРјРµСЂ С‚РµР»РµС„РѕРЅР° РІ С„РѕСЂРјР°С‚Рµ +7XXXXXXXXXX.", "РћРљ");
-                return;
-            }
-
-            var existingUser = await DatabaseService.Database.Table<Users>().FirstOrDefaultAsync
-                (u =>u.Phone == Phone.Text || (u.FirstName == firstName.Text && u.Name == Name.Text && u.Patronymic == Patronymic.Text));
-            if (existingUser != null)
-            {
-                await DisplayAlert("РћС€РёР±РєР°", "РџРѕР»СЊР·РѕРІР°С‚РµР»СЊ СЃ С‚Р°РєРёРјРё РґР°РЅРЅС‹РјРё СѓР¶Рµ Р·Р°СЂРµРіРёСЃС‚СЂРёСЂРѕРІР°РЅ.", "РћРљ");
-                return;
-            }
-            var user = new Users
-            {
-                FirstName = firstName.Text,
-                Name = Name.Text,
-                Patronymic = Patronymic.Text,
-                Phone = Phone.Text,
-                Password = passWord.Text,
-                Accesibility = 0,
-
-            };
-
-            await DatabaseService.Database.InsertAsync(user);
-            var createdUser = await DatabaseService.Database.Table<Users>()
-                               .OrderByDescending(u => u.UserID)
-                               .FirstOrDefaultAsync();
-            if (createdUser != null)
-            {
-                Session.CurrentUserId = createdUser.UserID;
-            }
-            await DisplayAlert("РЈСЃРїРµС…", "РџРѕР»СЊР·РѕРІР°С‚РµР»СЊ Р·Р°СЂРµРіРёСЃС‚СЂРёСЂРѕРІР°РЅ!", "РћРљ");
-            Navigation.InsertPageBefore(new NewPage1(), this);
-            await Navigation.PopAsync();
+            await Navigation.PushAsync(new ProfilePage());
+        }
+        private async void ToEntryPage_Clicked(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new EntryPage());
         }
 
-        private async void EnterToApps_Clicked(object sender, EventArgs e)
+        private async void EntrylistPage_Clicked(object sender, EventArgs e)
         {
-            var user = await DatabaseService.Database.Table<Users>()
-                  .FirstOrDefaultAsync(u => u.Name == email.Text && u.Password == pAssword.Text);
+            await Navigation.PushAsync(new UserEntryPage());
+        }
 
-            if (user != null)
-            {
-                Session.CurrentUserId = user.UserID;
+        private async void newsBtn_Clicked(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new NewsPage());
+        }
 
-                if (user.Accesibility == 1) // Р•СЃР»Рё РїРѕР»СЊР·РѕРІР°С‚РµР»СЊ Р°РґРјРёРЅРёСЃС‚СЂР°С‚РѕСЂ
-                {
-                    Navigation.InsertPageBefore(new AdminPage(), this);
-                }
-                else // Р•СЃР»Рё РѕР±С‹С‡РЅС‹Р№ РїРѕР»СЊР·РѕРІР°С‚РµР»СЊ
-                {
-                    await DisplayAlert("РЈСЃРїРµС…", $"Р”РѕР±СЂРѕ РїРѕР¶Р°Р»РѕРІР°С‚СЊ, {user.Name}!", "РћРљ");
-                    Navigation.InsertPageBefore(new NewPage1(), this);
-                }
+        private async void vkBtn_Clicked(object sender, EventArgs e)
+        {
+            string vkUrl = "https://vk.com/public217342443";
+            await Launcher.OpenAsync(vkUrl);
+        }
 
-                await Navigation.PopAsync();
-            }
-            else
-            {
-                await DisplayAlert("РћС€РёР±РєР°", "РќРµРІРµСЂРЅС‹Рµ РґР°РЅРЅС‹Рµ РґР»СЏ РІС…РѕРґР°!", "РћРљ");
-            }
+        private async void siteBtn_Clicked(object sender, EventArgs e)
+        {
+            string siteUrl = "https://cp-alkino.ru";
+            await Launcher.OpenAsync(siteUrl);
+        }
+
+        private async void gosBtn_Clicked(object sender, EventArgs e)
+        {
+            string gosUrl = "https://pos.gosuslugi.ru/form/?opaId=329659&utm_source=vk&utm_medium=80&utm_campaign=1020201202218";
+            await Launcher.OpenAsync(gosUrl);
         }
     }
-
 }
+

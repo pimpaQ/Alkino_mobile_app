@@ -7,10 +7,20 @@ using System.Threading.Tasks;
 public class DatabaseService
 {
     private static SQLiteAsyncConnection _database;
-    private static string DbPath => Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "mobiledb.db");
+    public static string DbPath => Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "mobiledb.db");
 
     public static async Task InitializeDatabaseAsync()
     {
+        var user = new Users
+        {
+            FirstName = "Валиуллина",
+            Name = "Зульфира",
+            Patronymic = "Дамировна",
+            Phone = "+79875663214",
+            Password = "12345",
+            Accesibility = 1,
+
+        };
         if (_database == null)
         {
             _database = new SQLiteAsyncConnection(DbPath);
@@ -19,20 +29,25 @@ public class DatabaseService
             await _database.CreateTableAsync<Entry>();
             await _database.CreateTableAsync<ReasonList>();
         }
-        var existingReasons = await _database.Table<ReasonList>().ToListAsync();
-        if (!existingReasons.Any())
+        var predefinedReasons = new List<string>
         {
-            var reasons = new List<ReasonList>
+            "Переустройство/перепланировка помещения в многоквартирном доме",
+            "Принять на учет гражданина, нуждающимся в жил.помещениях",
+            "Бытовая характеристика гражданина",
+            "Справка о составе семьи",
+            "Выписка из ЕГРН",
+            "Справка с места жительства умершего",
+            "Разрешение на захоронение",
+            "Другое"
+        };
+
+        foreach (var reasonName in predefinedReasons)
+        {
+            var exists = await _database.Table<ReasonList>().FirstOrDefaultAsync(r => r.ReasonName == reasonName);
+            if (exists == null)
             {
-                new ReasonList { ReasonName = "Переустройство/перепланировка помещения в многоквартирном доме" },
-                new ReasonList { ReasonName = "Принять на учет гражданина, нуждающимся в жил.помещениях" },
-                new ReasonList { ReasonName = "Бытовая характеристика гражданина" },
-                new ReasonList { ReasonName = "Справка о составе семьи" },
-                new ReasonList { ReasonName = "Выписка из ЕГРН" },
-                new ReasonList { ReasonName = "Справка с места жительства умершего" },
-                new ReasonList { ReasonName = "Разрешение на захоронение" },
-            };
-            await _database.InsertAllAsync(reasons);
+                await _database.InsertAsync(new ReasonList { ReasonName = reasonName });
+            }
         }
         await RemoveExpiredEntriesAsync();
     }
@@ -43,6 +58,5 @@ public class DatabaseService
         // Удаляем просроченные записи через критерий
         await _database.ExecuteAsync("DELETE FROM Entry WHERE Date || ' ' || Time < ?", currentDateTime.ToString("yyyy-MM-dd HH:mm:ss"));
     }
-
     public static SQLiteAsyncConnection Database => _database;
 }

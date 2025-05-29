@@ -24,7 +24,8 @@ public partial class EntryPage : ContentPage
             AppResources.r4,
             AppResources.r5,
             AppResources.r6,
-            AppResources.r7
+            AppResources.r7,
+            AppResources.r8
         };
         picker.ItemsSource = options;
     }

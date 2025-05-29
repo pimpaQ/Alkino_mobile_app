@@ -1,0 +1,123 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MauiApp1.MainPage"
+             NavigationPage.HasNavigationBar="False"
+             xmlns:resx="clr-namespace:MauiApp1.Resources.Strings"
+>
+
+    <Grid Padding="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <Image
+            Grid.Row="0"
+            Grid.ColumnSpan="2"
+            Source="logotip.png"
+            Background="Transparent"
+            Margin="20"/>
+        
+        <Frame Grid.ColumnSpan="2"
+               Grid.Row="1"
+               BackgroundColor="#8968FF"
+               CornerRadius="10"
+               HeightRequest="90"/>
+        
+        <Button Grid.Row="1"
+                HeightRequest="50"
+                Margin="15"
+                Background="Black"
+                Text="Регистрация"
+                FontSize="20"
+                FontFamily="Intr"
+                TextColor="White"
+                CornerRadius="10"
+                Clicked="RegistrationButton"
+                x:Name="RegistrationBtn"/>
+        
+        <Button Grid.Row="1"
+                Grid.Column="1"
+                HeightRequest="50"
+                Margin="10"
+                Background="White"
+                Text="Вход"
+                FontSize="20"
+                TextColor="Black"
+                CornerRadius="10"
+                Clicked="EnterButton"
+                x:Name="AuthorizationBtn"/>
+
+        <Label Text='Добро пожаловать в "Алькино"'
+            HorizontalOptions="Center"
+               HorizontalTextAlignment="Center"
+               FontSize="35"
+               Grid.ColumnSpan="2"
+               Grid.Row="2"
+               Margin="10"/>
+
+        <ScrollView Grid.Row="3" Grid.RowSpan="5" Grid.ColumnSpan="2" IsVisible="True" x:Name="EnterScroll">
+            <VerticalStackLayout x:Name="EnterView" Spacing="10" Padding="10" >
+                <Label Text="Имя" FontSize="20"/>
+                <Entry x:Name="email" FontSize="20" FontFamily="Intr"/>
+
+                <Label Text="Пароль" FontSize="20"/>
+                <Entry x:Name="pAssword" IsPassword="True" FontFamily="Intr" FontSize="20"/>
+                <Button
+                    HeightRequest="70"
+                    Margin="10,20,10,0"
+                    Text="Войти"
+                    FontSize="20"
+                    BackgroundColor="#8968FF"
+                    TextColor="White"
+                    CornerRadius="10"
+                    x:Name="EnterToApps"
+                    Clicked="EnterToApps_Clicked"/>
+            </VerticalStackLayout>
+        </ScrollView>
+
+
+        <ScrollView Orientation="Vertical" Grid.RowSpan="3" InputTransparent="True" Grid.ColumnSpan="2" Grid.Row="3" IsVisible="False" x:Name="RegistrView">
+            
+            <StackLayout Orientation="Vertical">
+                <StackLayout Orientation ="Vertical">
+                    <Label Text="Фамилия"/>
+                    <Entry FontFamily="Intr" x:Name="firstName"/>
+                </StackLayout>
+                <StackLayout Orientation ="Vertical">
+                    <Label Text="Имя"/>
+                    <Entry FontFamily="Intr" x:Name="Name"/>
+                </StackLayout>
+                <StackLayout Orientation ="Vertical">
+                    <Label Text="Отчество"/>
+                    <Entry FontFamily="Intr" x:Name="Patronymic"/>
+                </StackLayout>
+                <StackLayout Orientation ="Vertical">
+                    <Label Text="Телефон"/>
+                    <Entry FontFamily="Intr" x:Name="Phone"/>
+                </StackLayout>
+                <StackLayout Orientation ="Vertical">
+                    <Label Text="Пароль"/>
+                    <Entry FontFamily="Intr" x:Name="passWord"/>
+                </StackLayout>
+
+                <Button Text="Зарегистрироваться"
+                Margin="10"
+                CornerRadius="10"
+                BackgroundColor="#8968FF"
+                Clicked="Button_Clicked"/>
+                
+            </StackLayout>
+        </ScrollView>
+    </Grid>
+
+</ContentPage>

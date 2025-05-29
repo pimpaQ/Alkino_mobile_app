@@ -187,6 +187,15 @@ namespace MauiApp1.Resources.Strings {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Нет записей.
+        /// </summary>
+        internal static string nosign {
+            get {
+                return ResourceManager.GetString("nosign", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Контактный телефон: 7(34777)2-65-46.
         /// </summary>
         internal static string Phone {
@@ -282,6 +291,15 @@ namespace MauiApp1.Resources.Strings {
         internal static string r7 {
             get {
                 return ResourceManager.GetString("r7", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Другое.
+        /// </summary>
+        internal static string r8 {
+            get {
+                return ResourceManager.GetString("r8", resourceCulture);
             }
         }
         
@@ -390,15 +408,6 @@ namespace MauiApp1.Resources.Strings {
         internal static string Welcome {
             get {
                 return ResourceManager.GetString("Welcome", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Ищет локализованную строку, похожую на Добро пожаловать в Алькино.
-        /// </summary>
-        internal static string WelcomeMessage {
-            get {
-                return ResourceManager.GetString("WelcomeMessage", resourceCulture);
             }
         }
     }

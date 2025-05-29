@@ -21,7 +21,6 @@ namespace MauiApp1
         {
             await DatabaseService.InitializeDatabaseAsync();
         }
-        
 
     }
 
