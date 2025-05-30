@@ -11,17 +11,7 @@ public class DatabaseService
 
     public static async Task InitializeDatabaseAsync()
     {
-        var user = new Users
-        {
-            FirstName = "Валиуллина",
-            Name = "Зульфира",
-            Patronymic = "Дамировна",
-            Phone = "+79875663214",
-            Password = "12345",
-            Accesibility = 1,
-
-        };
-        if (_database == null)
+         if (_database == null)
         {
             _database = new SQLiteAsyncConnection(DbPath);
             await _database.ExecuteAsync("PRAGMA foreign_keys = ON;");

@@ -107,7 +107,7 @@
                 </StackLayout>
                 <StackLayout Orientation ="Vertical">
                     <Label Text="Пароль"/>
-                    <Entry FontFamily="Intr" x:Name="passWord"/>
+                    <Entry FontFamily="Intr" x:Name="passWord" IsPassword="True"/>
                 </StackLayout>
 
                 <Button Text="Зарегистрироваться"

@@ -66,13 +66,16 @@ namespace MauiApp1
                 await DisplayAlert("Ошибка", "Пользователь с такими данными уже зарегистрирован.", "ОК");
                 return;
             }
+            string salt = PasswordHasher.GenerateSalt();
+            string hashedPassword = PasswordHasher.HashPassword(passWord.Text, salt);
             var user = new Users
             {
                 FirstName = firstName.Text,
                 Name = Name.Text,
                 Patronymic = Patronymic.Text,
                 Phone = Phone.Text,
-                Password = passWord.Text,
+                Password = hashedPassword,
+                Salt = salt,
                 Accesibility = 0,
 
             };
@@ -93,27 +96,35 @@ namespace MauiApp1
         private async void EnterToApps_Clicked(object sender, EventArgs e)
         {
             var user = await DatabaseService.Database.Table<Users>()
-                  .FirstOrDefaultAsync(u => u.Name == email.Text && u.Password == pAssword.Text);
+                  .FirstOrDefaultAsync(u => u.Name == email.Text);
 
             if (user != null)
             {
-                Session.CurrentUserId = user.UserID;
-
-                if (user.Accesibility == 1) // Если пользователь администратор
+                string inputHash = PasswordHasher.HashPassword(pAssword.Text, user.Salt);
+                if (user.Password == inputHash)
                 {
-                    Navigation.InsertPageBefore(new AdminPage(), this);
-                }
-                else // Если обычный пользователь
-                {
-                    await DisplayAlert("Успех", $"Добро пожаловать, {user.Name}!", "ОК");
-                    Navigation.InsertPageBefore(new NewPage1(), this);
-                }
+                    // Успешный вход
+                    Session.CurrentUserId = user.UserID;
+                    if (user.Accesibility == 1) // Если пользователь администратор
+                    {
+                        Navigation.InsertPageBefore(new AdminPage(), this);
+                    }
+                    else // Если обычный пользователь
+                    {
+                        await DisplayAlert("Успех", $"Добро пожаловать, {user.Name}!", "ОК");
+                        Navigation.InsertPageBefore(new NewPage1(), this);
+                    }
 
-                await Navigation.PopAsync();
+                    await Navigation.PopAsync();
+                }
+                else
+                {
+                    await DisplayAlert("Ошибка", "Неверный пароль!", "ОК");
+                }          
             }
             else
             {
-                await DisplayAlert("Ошибка", "Неверные данные для входа!", "ОК");
+                await DisplayAlert("Ошибка", "Пользователь не найден!", "ОК");
             }
         }
     }
