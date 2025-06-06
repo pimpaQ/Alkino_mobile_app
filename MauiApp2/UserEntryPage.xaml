@@ -38,7 +38,10 @@
                             <Label Text="{Binding Description}" TextColor="White" FontSize="12" />
                             <!-- Новый Label для статуса -->
                             <Label Text="{Binding Status}" TextColor="White" FontSize="12" FontAttributes="Italic"/>
-                            <Label Text="{Binding RejectDescription}" TextColor="White" FontSize="12"/>
+                            <StackLayout Orientation="Horizontal">
+                                <Label Text="{x:Static resx:AppResources.RejectEntry}" TextColor="White" FontSize="12"/>
+                                <Label Text="{Binding RejectDescription}" TextColor="White" FontSize="12"/>
+                            </StackLayout>
                         </StackLayout>
                     </Frame>
                 </DataTemplate>

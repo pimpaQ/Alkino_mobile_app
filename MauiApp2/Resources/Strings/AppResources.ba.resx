@@ -234,4 +234,7 @@
   <data name="r8" xml:space="preserve">
     <value>Икенсе хеҙмәт</value>
   </data>
+  <data name="RejectEntry" xml:space="preserve">
+    <value>Кире кағылыу сәбәбе:</value>
+  </data>
 </root>

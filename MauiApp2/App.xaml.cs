@@ -8,6 +8,9 @@ namespace MauiApp1
         public App()
         {
             InitializeComponent();
+            TaskScheduler.UnobservedTaskException += (s, e) => {
+                MainPage?.DisplayAlert("Global Error", e.Exception.Message, "OK");
+            };
             MainPage = new NavigationPage(new MainPage());
         }
         void SetCulture()

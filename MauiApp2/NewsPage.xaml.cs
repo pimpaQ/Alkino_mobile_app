@@ -15,11 +15,13 @@ namespace MauiApp1
         {
             InitializeComponent();
             BindingContext = this;
-            LoadNews();
+            Loaded += (s, e) => LoadNews();
         }
 
         private async void LoadNews()
         {
+            System.Net.ServicePointManager.ServerCertificateValidationCallback +=
+    (sender, cert, chain, sslPolicyErrors) => true;
             try
             {
                 string accessToken = "3b964a553b964a553b964a556f38b0443533b963b964a555cc1821afaffb2e39442c8ea";
@@ -29,26 +31,43 @@ namespace MauiApp1
                 string url = $"https://api.vk.com/method/wall.get?owner_id={groupId}&count=15&access_token={accessToken}&v={apiVersion}";
 
                 using var client = new HttpClient();
-                var response = await client.GetStringAsync(url);
+                var response = await Task.Run(() => client.GetStringAsync(url));
 
                 var jsonDoc = JsonDocument.Parse(response);
-                var posts = jsonDoc.RootElement.GetProperty("response").GetProperty("items");
+                var root = jsonDoc.RootElement;
+
+                // Проверка на ошибку API
+                if (root.TryGetProperty("error", out var error))
+                {
+                    throw new Exception($"VK Error: {error.GetProperty("error_msg").GetString()}");
+                }
+
+                // Валидация структуры ответа
+                if (!root.TryGetProperty("response", out var responseElement) ||
+                    !responseElement.TryGetProperty("items", out var posts))
+                {
+                    throw new Exception("Invalid API response structure");
+                }
 
                 VkPosts.Clear();
-
                 foreach (var post in posts.EnumerateArray())
                 {
-                    string text = post.GetProperty("text").GetString();
+                    string text = post.TryGetProperty("text", out var t) ? t.GetString() : "";
+                    int id = post.TryGetProperty("id", out var i) ? i.GetInt32() : 0;
                     string postUrl = $"https://vk.com/wall{groupId}_{post.GetProperty("id").GetInt32()}";
                     string imageUrl = null;
 
                     // Если это репост, получаем оригинальный текст и вложения
                     JsonElement attachmentsSource = post;
-                    if (string.IsNullOrWhiteSpace(text) && post.TryGetProperty("copy_history", out var copyHistory))
+                    if (string.IsNullOrWhiteSpace(text) &&
+                        post.TryGetProperty("copy_history", out var copyHistory) &&
+                        copyHistory.ValueKind == JsonValueKind.Array &&
+                        copyHistory.GetArrayLength() > 0)
                     {
                         var originalPost = copyHistory[0];
-                        text = originalPost.GetProperty("text").GetString();
-                        attachmentsSource = originalPost;
+                        text = originalPost.TryGetProperty("text", out var textProp) ? textProp.GetString() : "";
+                    
+                                            attachmentsSource = originalPost;
                     }
 
                     // Поиск фото или видео
@@ -56,11 +75,13 @@ namespace MauiApp1
                     {
                         foreach (var attachment in attachments.EnumerateArray())
                         {
-                            string type = attachment.GetProperty("type").GetString();
+                            if (!attachment.TryGetProperty("type", out var typeProp)) continue;
 
-                            if (type == "photo")
+                            string type = typeProp.GetString();
+
+                            if (type == "photo" && attachment.TryGetProperty("photo", out var photo))
                             {
-                                var photo = attachment.GetProperty("photo");
+                                photo = attachment.GetProperty("photo");
                                 imageUrl = photo
                                     .GetProperty("sizes")
                                     .EnumerateArray()

@@ -13,6 +13,7 @@ namespace MauiApp1.Models
         public string DateTime { get; set; }   // Дата и время
         public string UserName { get; set; }   // ФИО пользователя
         public string Description { get; set; } // Примечание
+        public string RejectDescription { get; set; }
         public int Access { get; set; }
     }
 

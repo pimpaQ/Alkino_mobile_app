@@ -22,6 +22,10 @@
                             <Label Text="{Binding DateTime}" FontSize="14" TextColor="White"/>
                             <Label Text="{Binding UserName}" FontSize="14" TextColor="White"/>
                             <Label Text="{Binding Description}" FontSize="12" TextColor="White"/>
+                            <StackLayout Orientation="Horizontal">
+                                <Label Text="Причина отказа:" FontSize="12" TextColor="White"/>
+                                <Label Text="{Binding RejectDescription}" FontSize="12" TextColor="White"/>
+                            </StackLayout>
                             <StackLayout Orientation="Horizontal" IsVisible="{Binding Access, Converter={StaticResource PendingAccessToVisibilityConverter}}" Spacing="10">
                                 <Button Text="Подтвердить"
                                         BackgroundColor="Green"

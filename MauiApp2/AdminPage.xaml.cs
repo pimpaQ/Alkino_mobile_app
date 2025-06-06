@@ -53,6 +53,7 @@ public partial class AdminPage : ContentPage
                     DateTime = $"{entry.Date} {entry.Time}",
                     UserName = $"{user.FirstName} {user.Name} {user.Patronymic}",
                     Description = entry.Description,
+                    RejectDescription = entry.RejectDescription,
                     Access = entry.Acces
                 };
 
@@ -149,6 +150,7 @@ public partial class AdminPage : ContentPage
             await DisplayAlert("Успех", "Запись успешно подтверждена", "ОК");
             await Navigation.PushAsync(new AdminPage());
         }
+        ReloadPage();
     }
 
     private async void OnRejectBtn_Clicked(object sender, EventArgs e)
@@ -175,12 +177,12 @@ public partial class AdminPage : ContentPage
         if (dbEntry != null)
         {
             dbEntry.Acces = 2; // Отклоненная запись
-            dbEntry.RejectDescription = $"Причина отказа: {reason}"; // Сохраняем причину в описании
+            dbEntry.RejectDescription = reason; // Сохраняем причину в описании
             await DatabaseService.Database.UpdateAsync(dbEntry);
 
             // Обновляем локальные данные
             entry.Access = 2;
-            entry.Description = $"Отклонено: {reason}";
+            entry.RejectDescription = reason;
 
             RejectedEntries.Add(entry); // Добавляем запись в отклоненные
             PendingEntries.Remove(entry); // Убираем из ожидающих
@@ -188,7 +190,18 @@ public partial class AdminPage : ContentPage
             UpdateCurrentEntries(RejectedEntries); // Обновляем текущий список
 
             await DisplayAlert("Успех", "Запись успешно отклонена.", "ОК");
-            await Navigation.PushAsync(new AdminPage());
+            ReloadPage();
         }
+    }
+    private async void ReloadPage()
+    {
+        // Сохраняем текущий выбранный раздел
+        var currentTab = labelll.Text;
+
+        // Полностью пересоздаем страницу
+        await Navigation.PushAsync(new AdminPage());
+
+        // Удаляем текущую страницу из стека навигации
+        Navigation.RemovePage(this);
     }
 }

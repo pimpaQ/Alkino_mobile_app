@@ -35,7 +35,8 @@ public partial class UserEntryPage : ContentPage
                                   .FirstOrDefaultAsync(r => r.ReasonListId == entry.ReasonID);
         }
         AllEntries = new ObservableCollection<Entry>(entries);
-        FilteredEntries = new ObservableCollection<Entry>(entries.Where(e => e.Acces == 1));
+        HighlightButton("Waiting");
+        FilteredEntries = new ObservableCollection<Entry>(entries.Where(e => e.Acces == 0));
         OnPropertyChanged(nameof(FilteredEntries));
     }
     private string _selectedGroup;
@@ -71,7 +72,7 @@ public partial class UserEntryPage : ContentPage
         OnPropertyChanged(nameof(FilteredEntries));
     }
 
-    private void waitBtn_Clicked(object sender, EventArgs e)
+    public void waitBtn_Clicked(object sender, EventArgs e)
     {
         HighlightButton("Waiting");
         FilteredEntries = new ObservableCollection<Entry>(AllEntries.Where(e => e.Acces == 0));

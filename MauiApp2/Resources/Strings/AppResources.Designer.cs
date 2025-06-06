@@ -313,6 +313,15 @@ namespace MauiApp1.Resources.Strings {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Причина отказа:.
+        /// </summary>
+        internal static string RejectEntry {
+            get {
+                return ResourceManager.GetString("RejectEntry", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Подтверждена.
         /// </summary>
         internal static string s1 {

@@ -236,4 +236,7 @@
   <data name="r8" xml:space="preserve">
     <value>Другое</value>
   </data>
+  <data name="RejectEntry" xml:space="preserve">
+    <value>Причина отказа:</value>
+  </data>
 </root>
